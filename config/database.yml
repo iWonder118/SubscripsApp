@@ -12,7 +12,8 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
+  port: 3306
   username: root
   password: password
   host: db
@@ -27,7 +28,6 @@ development:
 test:
   <<: *default
   database: SubscripsApp_test
-
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: SubscripsApp_production
-  username: SubscripsApp
-  password: <%= ENV['SUBSCRIPSAPP_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.credentials.db[:user] %> 
+  password: <%= Rails.application.credentials.db[:password] %> 
+  host: <%= Rails.application.credentials.db[:host] %>

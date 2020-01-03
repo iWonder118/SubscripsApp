@@ -6,10 +6,10 @@ RUN apt-get update -qq && \
                        libpq-dev \        
                        nodejs           
 
-# RAILS_ENV と RAILS_MASTER_KEY をあと差しできるようにしています
+# RAILS_ENV をあと差しできるようにしています
 ARG RAILS_ENV
 
-# あと差しした RAILS_ENV と RAILS_MASTER_KEY を環境変数に設定します
+# あと差しした RAILS_ENV を環境変数に設定します
 ENV RAILS_ENV ${RAILS_ENV}
 
 
