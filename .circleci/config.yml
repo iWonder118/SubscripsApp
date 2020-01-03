@@ -15,7 +15,7 @@ jobs:
       - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
-          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -33,11 +33,6 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run:
-          name: install dockerize
-          environment:
-            DOCKERIZE_VERSION: v0.6.1
-          command: wget https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz && rm dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz
       - run:
           name: Wait for db
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
