@@ -32,6 +32,3 @@ ADD . $APP_ROOT
 
 # RAILS_ENVがprodunctionのとき assets:precompile を実行するようにしています
 RUN if [ "${RAILS_ENV}" = "production" ]; then bundle exec rails assets:precompile; else export RAILS_ENV=development; fi
-
-EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]

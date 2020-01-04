@@ -15,7 +15,7 @@ jobs:
       - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
