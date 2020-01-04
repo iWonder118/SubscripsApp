@@ -6,12 +6,13 @@ RUN apt-get update -qq && \
                        libpq-dev \        
                        nodejs           
 
-# RAILS_ENV をあと差しできるようにしています
+# RAILS_ENV と RAILS_MASTER_KEY をあと差しできるようにしています
 ARG RAILS_ENV
+ARG RAILS_MASTER_KEY
 
-# あと差しした RAILS_ENV を環境変数に設定します
+# あと差しした RAILS_ENV と RAILS_MASTER_KEY を環境変数に設定します
 ENV RAILS_ENV ${RAILS_ENV}
-
+ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /SubscripsApp 
