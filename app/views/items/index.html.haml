@@ -1,0 +1,12 @@
+%h1 Hello SubscripS
+%h2
+  Wellcome!!
+  %h2
+    %div
+      = form_for @item do |form|
+        = form.text_field :title
+        = form.submit
+%p
+%ul
+  - @items.each do |item|
+    %li= item.title
