@@ -53,15 +53,15 @@ describe User do
     it "passwordが7文字以下の場合、登録できないこと" do
       user = build(:user, password: "12345qw", password_confirmation: "12345qw")
       user.valid?
-      expect(user.errors[:password]).to include("8文字以上で入力してください", "は英字と数字両方を含むパスワードを設定してください")
+      expect(user.errors[:password]).to include("は8文字以上で入力してください")
     end
 
-    it "passwordが129文字以上の場合、登録できないこと" do
+    it "passwordが73文字以上の場合、登録できないこと" do
       o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      password = (0...129).map { o[rand(o.length)] }.join
+      password = (0...73).map { o[rand(o.length)] }.join
       user = build(:user, password: password.to_s, password_confirmation: password.to_s)
       user.valid?
-      expect(user.errors[:password]).to include("は128文字以内で入力してください")
+      expect(user.errors[:password]).to include("は72文字以内で入力してください")
     end
 
     it "passwordが数字のみの場合、登録できないこと" do
@@ -81,9 +81,9 @@ describe User do
       expect(user).to be_valid
     end
 
-    it "passwordが数字と英字を含む128文字の場合、登録できること" do
+    it "passwordが数字と英字を含む72文字の場合、登録できること" do
       o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
-      password = (0...128).map { o[rand(o.length)] }.join
+      password = (0...72).map { o[rand(o.length)] }.join
       user = build(:user, password: password.to_s, password_confirmation: password.to_s)
       expect(user).to be_valid
     end
