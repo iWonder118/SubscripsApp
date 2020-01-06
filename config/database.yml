@@ -29,7 +29,7 @@ development:
 test:
   <<: *default
   username: root
-  password: password
+  password: <%= ENV.fetch('DB_PASS', 'password') %>
   host: <%= ENV.fetch('DB_HOST', 'db') %>
   database: SubscripsApp_test
 # As with config/secrets.yml, you never want to store sensitive information,
