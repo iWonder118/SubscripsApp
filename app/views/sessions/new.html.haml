@@ -11,10 +11,10 @@
     = form_with url: login_path, local: true, class: "right-form" do |f|
       .right-form__email
         %i.fas.fa-envelope
-        = f.text_field :email, class: "form-email"
+        = f.text_field :email, class: "form-email", placeholder: "メールアドレス"
       .right-form__password
         %i.fas.fa-key
-        = f.password_field :password, class: "form-password"
+        = f.password_field :password, class: "form-password", placeholder: "パスワード"
       .form-btns
         %input.form-btns__login{ type: "submit", name: "commit", value: "ログイン", "data-disable-with": "ログイン"}
         = link_to "サインアップ", signup_path,class: "form-btns__signup"

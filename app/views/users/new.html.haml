@@ -1,15 +1,28 @@
-%h2 サインアップ 
-= form_with model: @user, url: signup_path, local: true  do |f|
-  = f.label :name
-  = f.text_field :name
-
-  = f.label :email
-  = f.text_field :email
-
-  = f.label :password
-  = f.text_field :password
-
-  = f.label :password_confirmation
-  = f.text_field :password_confirmation
-
-  = f.submit '登録'
+.users-main
+  .users-main__left
+    .left-contents
+      = link_to root_path, class:"left-contents__top" do
+        %p
+          SubscripS
+      .left-contents__description
+        %p
+          忘れているサブスクはありませんか？
+  .users-main__right
+    = form_with model: @user, url: signup_path, local: true, class: "right-form"  do |f|
+      .right-form__name
+        %i.fas.fa-user-circle
+        = f.text_field :name, class: "form-name", placeholder: "ニックネーム"
+      .right-form__email
+        %i.fas.fa-envelope
+        = f.text_field :email, class: "form-email", placeholder: "メールアドレス"
+      .right-form__password
+        %i.fas.fa-key
+        = f.password_field :password, class: "form-password", placeholder: "パスワード"
+      .right-form__confirmation
+        %i.fas.fa-key
+        = f.text_field :password_confirmation, class: "form-confirmation", placeholder: "同じパスワードをもう一度"
+      .form-btns
+        %input.form-btns__signup{ type: "submit", name: "commit", value: "登録", "data-disable-with": "ログイン"}
+        = link_to "ログイン", login_path,class: "form-btns__login"
+  .users-main__copyright
+    Copyright © SubscripS 2019
