@@ -1,23 +1,22 @@
 .users-main
   .users-main__left
-    = link_to root_path, class:"main-left__top" do
-      %p
-        SubscripS
-    .main-left__description
-      %p
-        忘れているサブスクはありませんか？
-        %br
-        SubscripSで管理しよう!
+    .left-contents
+      = link_to root_path, class:"left-contents__top" do
+        %p
+          SubscripS
+      .left-contents__description
+        %p
+          忘れているサブスクはありませんか？
   .users-main__right
-    = form_with url: login_path, local: true, class: ".main-right__form"do |f|
+    = form_with url: login_path, local: true, class: "right-form" do |f|
       .right-form__email
         %i.fas.fa-envelope
-        = f.text_field :email
+        = f.text_field :email, class: "form-email"
       .right-form__password
         %i.fas.fa-key
-        = f.password_field :password
-    .main-right__btns
-      %input.right-btns__login{ type: "submit", name: "commit", value: "ログイン", "data-disable-with": "ログイン"}
-      = link_to "サインアップ", signup_path,class: "right-btns__signup"
-  .user-main__copyright
+        = f.password_field :password, class: "form-password"
+      .form-btns
+        %input.form-btns__login{ type: "submit", name: "commit", value: "ログイン", "data-disable-with": "ログイン"}
+        = link_to "サインアップ", signup_path,class: "form-btns__signup"
+  .users-main__copyright
     Copyright © SubscripS 2019
