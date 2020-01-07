@@ -8,7 +8,7 @@ services:
     volumes:
       - subscrips_db:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "4306:3306"
 
   app:
     build: .
@@ -23,5 +23,7 @@ services:
       - "3000:3000"
     links:
       - db
+    tty: true
+    stdin_open: true
 volumes:
   subscrips_db:

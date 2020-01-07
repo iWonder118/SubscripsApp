@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_03_082152) do
+ActiveRecord::Schema.define(version: 2020_01_05_033843) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", limit: 191, null: false
+    t.string "email", limit: 191, null: false
+    t.string "password_digest", limit: 191, null: false
+    t.string "remember_token", limit: 191
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
