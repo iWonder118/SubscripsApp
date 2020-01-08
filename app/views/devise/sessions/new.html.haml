@@ -1,12 +1,5 @@
 .users-main
-  .users-main__left
-    .left-contents
-      = link_to root_path, class:"left-contents__top" do
-        %p
-          SubscripS
-      .left-contents__description
-        %p
-          忘れているサブスクはありませんか？
+  = render "devise/shared/user-left" 
   .users-main__right
     = form_for(resource, as: resource_name, url: session_path(resource_name), html:{class: "right-form"}) do |f|
       .right-form__email
@@ -20,5 +13,4 @@
       .form-btns
         %input.form-btns__login{ type: "submit", name: "commit", value: "ログイン", "data-disable-with": "ログイン"}
         = link_to "サインアップ", new_user_registration_path,class: "form-btns__signup"
-  .users-main__copyright
-    Copyright © SubscripS 2019
+  = render "devise/shared/copyright" 
