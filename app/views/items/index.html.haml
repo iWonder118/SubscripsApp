@@ -10,6 +10,12 @@
         = form.text_field :color
         = form.text_field :plan
         = form.text_field :price
+        = form.fields_for :payment do |pform|
+          = pform.text_field  :period_long
+          = pform.text_field  :period_unit
+          = pform.date_field :first_payment
+          = pform.text_field  :pay_method
+          = pform.text_area   :description
         = form.check_box  :private
         = form.submit
 %p
