@@ -1,36 +1,18 @@
 class ApplicationController < ActionController::Base
-
-  before_action :current_user
-  before_action :require_sign_in!
-  helper_method :signed_in?
-
   protect_from_forgery with: :exception
 
-  def current_user
-    remember_token = User.encrypt(cookies[:user_remember_token])
-    @current_user ||= User.find_by(remember_token: remember_token)
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!
+
+  # deviseコントローラーにストロングパラメータを追加する          
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+  def configure_permitted_parameters
+    # サインアップ時にnameのストロングパラメータを追加
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    # アカウント編集の時にnameとprofileのストロングパラメータを追加
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
-
-  def sign_in(user)
-    remember_token = User.new_remember_token
-    cookies.permanent[:user_remember_token] = remember_token
-    user.update!(remember_token: User.encrypt(remember_token),password: session_params[:password],password_confirmation:session_params[:password])
-    @current_user = user
-  end
-
-  def sign_out
-    @current_user = nil
-    cookies.delete(:user_remember_token)
-  end
-
-  def signed_in?
-    @current_user.present?
-  end
-
-  private
-
-    def require_sign_in!
-      redirect_to login_path unless signed_in?
-    end
 
 end
