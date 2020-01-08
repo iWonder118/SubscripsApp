@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :items, dependent: :destroy
+
   has_secure_password validations: true
 
   VALID_EMAIL_REGEX    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
