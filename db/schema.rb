@@ -10,18 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_082902) do
+ActiveRecord::Schema.define(version: 2020_01_08_083102) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "link"
-    t.text "description"
     t.string "price", null: false
     t.boolean "private", default: false, null: false
     t.bigint "user_id"
+    t.string "plan", null: false
+    t.string "color", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "period_long", null: false
+    t.integer "period_unit", null: false
+    t.date "first_payment", null: false
+    t.string "pay_method", default: ""
+    t.text "description"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_payments_on_item_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -34,4 +47,5 @@ ActiveRecord::Schema.define(version: 2020_01_07_082902) do
   end
 
   add_foreign_key "items", "users"
+  add_foreign_key "payments", "items"
 end

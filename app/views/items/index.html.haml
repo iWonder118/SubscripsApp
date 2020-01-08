@@ -6,6 +6,10 @@
     %div
       = form_for @item do |form|
         = form.text_field :title
+        = form.text_field :link
+        = form.text_area  :description
+        = form.text_field :price
+        = form.check_box  :private
         = form.submit
 %p
 %ul
