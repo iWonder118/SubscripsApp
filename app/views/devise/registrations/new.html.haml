@@ -1,21 +1,29 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.users-main
+  .users-main__left
+    .left-contents
+      = link_to root_path, class:"left-contents__top" do
+        %p
+          SubscripS
+      .left-contents__description
+        %p
+          忘れているサブスクはありませんか？
+  .users-main__right
+    = render "devise/shared/error_messages", resource: resource
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html:{class: "right-form"}) do |f|
+      .right-form__name
+        %i.fas.fa-user-circle
+        = f.text_field :name, class: "form-name", placeholder: "ニックネーム"
+      .right-form__email
+        %i.fas.fa-envelope
+        = f.text_field :email, class: "form-email", placeholder: "メールアドレス"
+      .right-form__password
+        %i.fas.fa-key
+        = f.text_field :password, class: "form-password", placeholder: "パスワード"
+      .right-form__confirmation
+        %i.fas.fa-key
+        = f.text_field :password_confirmation, class: "form-confirmation", placeholder: "同じパスワードをもう一度"
+      .form-btns
+        %input.form-btns__signup{ type: "submit", name: "commit", value: "登録", "data-disable-with": "ログイン"}
+        = link_to "ログイン", new_user_session_path,class: "form-btns__login"
+  .users-main__copyright
+    Copyright © SubscripS 2019

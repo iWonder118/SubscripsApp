@@ -1,17 +1,24 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.users-main
+  .users-main__left
+    .left-contents
+      = link_to root_path, class:"left-contents__top" do
+        %p
+          SubscripS
+      .left-contents__description
+        %p
+          忘れているサブスクはありませんか？
+  .users-main__right
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html:{class: "right-form"}) do |f|
+      .right-form__email
+        %i.fas.fa-envelope
+        = f.text_field :email, class: "form-email", placeholder: "メールアドレス"
+      .right-form__password
+        %i.fas.fa-key
+        = f.password_field :password, class: "form-password", placeholder: "パスワード"
+      - if devise_mapping.rememberable?
+        %input{ type: "hidden", name: "user[remember_me]", value: "1"}
+      .form-btns
+        %input.form-btns__login{ type: "submit", name: "commit", value: "ログイン", "data-disable-with": "ログイン"}
+        = link_to "サインアップ", new_user_registration_path,class: "form-btns__signup"
+  .users-main__copyright
+    Copyright © SubscripS 2019
