@@ -15,4 +15,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
+  def index
+    # ログイン済みの場合は、ユーザページへリダイレクト
+    if login_check?
+      redirect_to "/users/#{current_user.id}" and return
+    end
+    render template: 'index'
+  end
+
 end
