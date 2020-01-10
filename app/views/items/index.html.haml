@@ -5,7 +5,7 @@
 %ul#result
   - @items.each do |item|
     %li
-      %p
+      %p{"data-delete-p": "#{item.id}"}
         = item.title
         = item.link
         = item.color
@@ -16,7 +16,7 @@
         = item.payment.first_payment
         = item.payment.description
 
-      = link_to '削除', user_item_path(current_user.id, item.id), method: :delete
+      = link_to '削除', user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}"
 
 %div
   = form_with model: @item, url: user_items_path(current_user.id), id: 'new_item' do |form|

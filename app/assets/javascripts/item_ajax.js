@@ -1,6 +1,6 @@
 $(function(){
   function buildHTML(item){
-    var html = `<li> 
+    let html = `<li> 
                   <p>
                     ${item.id}
                     ${item.title}
@@ -19,8 +19,9 @@ $(function(){
 
   $('#new_item').submit(function(e){
     e.preventDefault();
-    var formData = new FormData(this);
-    var url = $(this).attr('action');
+    let formData = new FormData(this);
+    let url = $(this).attr('action');
+
     $.ajax({
       url: url,
       type: "POST",
@@ -32,7 +33,7 @@ $(function(){
     
 
     .done(function(data){
-      var html = buildHTML(data);
+      let html = buildHTML(data);
       $('#result').append(html);
       $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
     })
@@ -47,4 +48,29 @@ $(function(){
     })
     return false; 
   })
+
+  $('.delete_item').on('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    let url = $(this).attr('href');
+    let delete_id = $(this)[0].dataset['delete'];
+
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      dataType: 'json',
+      data: JSON.stringify({delete_id: delete_id}),
+
+      success: function(res) {
+        $("a[data-delete=" + delete_id + "]").parent().append( `<span>削除しました</span>`);
+        $("a[data-delete=" + delete_id + "]").remove();
+        $("p[data-delete-p=" + delete_id + "]").remove();
+        return false;
+      },
+      
+      error: function(res) {
+        return false;
+      }
+    })
+  });
 });
