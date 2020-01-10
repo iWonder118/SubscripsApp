@@ -2,12 +2,18 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:index]
 
   def index
-    @items = Item.all
+    @items = Item.includes(:payment).where(user_id: current_user.id)
   end
 
   def create
-    @item = Item.create(item_params)
-    redirect_to :root
+    @item = Item.new(item_params)
+    if @item.save
+      respond_to do |format|
+        format.json
+      end
+    else
+      redirect_to :root
+    end
   end
 
 private

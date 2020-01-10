@@ -5,10 +5,19 @@
 %ul#result
   - @items.each do |item|
     %li
-      = item.title
+      %p
+        = item.title
+        = item.link
+        = item.color
+        = item.price
+        = item.private
+        = item.payment.period_long
+        = item.payment.period_unit
+        = item.payment.first_payment
+        = item.payment.description
 
 %div
-  = form_with model: @item, url: user_items_path(current_user.id) do |form|
+  = form_with model: @item, url: user_items_path(current_user.id), id: 'new_item' do |form|
     = form.label :title
     = form.text_field :title
     = form.label :link
@@ -32,4 +41,4 @@
       = pform.text_area   :description
     = form.label :private
     = form.check_box  :private
-    = form.submit
+    = form.submit "登録", id: 'new_item_btn'
