@@ -16,6 +16,8 @@
         = item.payment.first_payment
         = item.payment.description
 
+      = link_to '削除', user_item_path(current_user.id, item.id), method: :delete
+
 %div
   = form_with model: @item, url: user_items_path(current_user.id), id: 'new_item' do |form|
     = form.label :title
