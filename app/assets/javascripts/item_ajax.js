@@ -17,6 +17,7 @@ $(function(){
     return html;
   }
 
+  // 作成時の非同期処理
   $('#new_item').submit(function(e){
     e.preventDefault();
     let formData = new FormData(this);
@@ -48,7 +49,7 @@ $(function(){
     })
     return false; 
   })
-
+  // 削除時の非同期処理
   $('.delete_item').on('click', function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -67,7 +68,7 @@ $(function(){
         $("p[data-delete-p=" + delete_id + "]").remove();
         return false;
       },
-      
+
       error: function(res) {
         return false;
       }
