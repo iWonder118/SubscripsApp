@@ -2,34 +2,35 @@
 %h1 Hello SubscripS
 %h2
   Wellcome!!
-  %h2
-    %div
-      = form_with model: @item, url: user_items_path(current_user.id) do |form|
-        = form.label :title
-        = form.text_field :title
-        = form.label :link
-        = form.text_field :link
-        = form.label :color
-        = form.text_field :color
-        = form.label :plan
-        = form.text_field :plan
-        = form.label :price
-        = form.text_field :price
-        = form.fields_for :payment do |pform|
-          = pform.label :period_long
-          = pform.text_field  :period_long
-          = pform.label :period_unit
-          = pform.text_field  :period_unit
-          = pform.label :first_payment
-          = pform.date_field :first_payment
-          = pform.label :pay_method
-          = pform.text_field  :pay_method
-          = pform.label :description
-          = pform.text_area   :description
-        = form.label :private
-        = form.check_box  :private
-        = form.submit
-%p
 %ul
   - @items.each do |item|
-    %li= item.title
+    %li
+      .contents
+        = item.title
+
+%div
+  = form_with model: @item, url: user_items_path(current_user.id) do |form|
+    = form.label :title
+    = form.text_field :title
+    = form.label :link
+    = form.text_field :link
+    = form.label :color
+    = form.text_field :color
+    = form.label :plan
+    = form.text_field :plan
+    = form.label :price
+    = form.text_field :price
+    = form.fields_for :payment do |pform|
+      = pform.label :period_long
+      = pform.text_field  :period_long
+      = pform.label :period_unit
+      = pform.select  :period_unit, [['---', 0], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]]
+      = pform.label :first_payment
+      = pform.date_field :first_payment
+      = pform.label :pay_method
+      = pform.text_field  :pay_method
+      = pform.label :description
+      = pform.text_area   :description
+    = form.label :private
+    = form.check_box  :private
+    = form.submit
