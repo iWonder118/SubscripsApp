@@ -2,16 +2,10 @@
 %h1 Hello SubscripS
 %h2
   Wellcome!!
-- if @item.errors.any?
-  #error_explanation.alert.alert-danger
-    %ul
-      - @item.errors.full_messages.each do |message|
-        %li= message
-%ul
+%ul#result
   - @items.each do |item|
     %li
-      .contents
-        = item.title
+      = item.title
 
 %div
   = form_with model: @item, url: user_items_path(current_user.id) do |form|
