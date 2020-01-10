@@ -2,6 +2,11 @@
 %h1 Hello SubscripS
 %h2
   Wellcome!!
+- if @item.errors.any?
+  #error_explanation.alert.alert-danger
+    %ul
+      - @item.errors.full_messages.each do |message|
+        %li= message
 %ul
   - @items.each do |item|
     %li
