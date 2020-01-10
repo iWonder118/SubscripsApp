@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:index]
+  before_action :set_item, only: [:edit, :update, :destroy]
 
   def index
+    @item = Item.new
+    @item.build_payment
     @items = Item.includes(:payment).where(user_id: current_user.id)
   end
 
@@ -12,12 +14,24 @@ class ItemsController < ApplicationController
         format.json
       end
     else
-      redirect_to :root
+      redirect_to root_path
+    end
+  end
+
+  def edit
+
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render :edit
     end
   end
 
   def destroy
-    @item = Item.find(params[:id])
+
     if @item.destroy
       render json: { message: "Successfuly deleted" }, status: :ok
     else
@@ -34,8 +48,6 @@ private
   end
 
   def set_item
-    @item = Item.new
-    @item.build_payment
+    @item = Item.find(params[:id])
   end
-
 end
