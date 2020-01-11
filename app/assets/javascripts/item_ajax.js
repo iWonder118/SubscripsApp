@@ -1,29 +1,58 @@
 $(function(){
   function buildHTML(item){
-    let html = `<li> 
+    let html = `<li data-delete-li="${item.id}"> 
                   <p>
-                    ${item.id}
                     ${item.title}
+                  </p>
+                  <p>
                     ${item.link}
+                  </p>
+                  <p>
                     ${item.color}
+                  </p>
+                  <p>
                     ${item.price}
+                  </p>
+                  <p>
                     ${item.private}
+                  </p>
+                  <p>
                     ${item.period_long}
+                  </p>
+                  <p>
                     ${item.period_unit}
+                  </p>
+                  <p>
                     ${item.first_payment}
+                  </p>
+                  <p>
                     ${item.description}
                   </p>
+                  <a class="edit_item" href="/users/${item.uid}/items/${item.id}/edit">編集</a>
+                  <a class="delete_item" data-delete="${item.id}" rel="nofollow" data-method="delete" href="/users/${item.uid}/items/${item.id}">削除</a>
                 </li>`
     return html;
   }
 
+  let InlineEdit;
+  let values = {
+    id: "",
+    content: "",
+  }
+
+  function reBuildHTML(item) {
+    let html = `<div class="content__message__box"><p class="lower-message__content">${ item.content }</p></div>`
+
+  InlineEdit.removeClass('InlineEdit-active').empty().append(html);
+  }
+
   // 作成時の非同期処理
-  $('#new_item').submit(function(e){
+  $(document).on('submit', '#new_item', function(e){
     e.preventDefault();
     let formData = new FormData(this);
     let url = $(this).attr('action');
 
-    $.ajax({
+    jqxhr = $.ajax({
       url: url,
       type: "POST",
       data: formData,
@@ -49,29 +78,32 @@ $(function(){
     })
     return false; 
   })
+
   // 削除時の非同期処理
-  $('.delete_item').on('click', function(e){
+  $(document).on('click', '.delete_item', function(e, xhr){
     e.preventDefault();
-    e.stopPropagation();
     let url = $(this).attr('href');
     let delete_id = $(this)[0].dataset['delete'];
 
-    $.ajax({
+    jqxhr = $.ajax({
       url: url,
       type: 'DELETE',
-      dataType: 'json',
-      data: JSON.stringify({delete_id: delete_id}),
-
-      success: function(res) {
-        $("a[data-delete=" + delete_id + "]").parent().append( `<span>削除しました</span>`);
-        $("a[data-delete=" + delete_id + "]").remove();
-        $("p[data-delete-p=" + delete_id + "]").remove();
-        return false;
+      headers: {
+        'Content-Type': 'application/json',
       },
-
-      error: function(res) {
-        return false;
-      }
+      data: JSON.stringify({delete_id: delete_id}),
+      dataType: 'json',
+      processData: false,
+      contentType: false
     })
+
+    .done(function(){
+      $("li[data-delete-li=" + delete_id + "]").remove();
+    })
+
+    .fail(function(){
+      alert('削除にに失敗しました');
+    })
+    return false;
   });
 });

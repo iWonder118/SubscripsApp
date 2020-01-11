@@ -31,9 +31,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-
     if @item.destroy
-      render json: { message: "Successfuly deleted" }, status: :ok
+      respond_to do |format|
+        format.json 
+      end
     else
       redirect_to root_path
     end

@@ -4,20 +4,28 @@
   Wellcome!!
 %ul#result
   - @items.each do |item|
-    %li
-      %p{"data-delete-p": "#{item.id}"}
+    %li{"data-delete-li": "#{item.id}"}
+      %p
         = item.title
+      %p
         = item.link
+      %p
         = item.color
+      %p
         = item.price
+      %p
         = item.private
+      %p
         = item.payment.period_long
+      %p
         = item.payment.period_unit
+      %p
         = item.payment.first_payment
+      %p
         = item.payment.description
 
-      = link_to '編集', edit_user_item_path(current_user.id, item.id)
-      = link_to '削除', user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}"
+      = link_to '編集', edit_user_item_path(current_user.id, item.id), class: "edit_item"
+      = link_to '削除', user_item_path(current_user.id, item.id), class: "delete_item", "data-delete": "#{item.id}"
 
 %div
   = form_with model: @item, url: user_items_path(current_user.id), local: true, id: 'new_item' do |form|
