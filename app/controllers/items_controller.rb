@@ -32,13 +32,9 @@ class ItemsController < ApplicationController
 
   def destroy
     if @item.destroy
-      respond_to do |format|
-        format.json 
-      end
     else
       redirect_to root_path
     end
-    
   end
 
 private

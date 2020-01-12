@@ -4,52 +4,53 @@
   Wellcome!!
 %ul#result
   - @items.each do |item|
-    %li{"data-delete-li": "#{item.id}"}
-      %p
+    %li{id: "item-#{item.id}"}
+      %p{"data-title": "#{item.id}"}
         = item.title
-      %p
+      %p{"data-link": "#{item.id}"}
         = item.link
-      %p
+      %p{"data-color": "#{item.id}"}
         = item.color
-      %p
+      %p{"data-price": "#{item.id}"}
         = item.price
-      %p
+      %p{"data-private": "#{item.id}"}
         = item.private
-      %p
+      %p{"data-period_long": "#{item.id}"}
         = item.payment.period_long
-      %p
+      %p{"data-period_unit": "#{item.id}"}
         = item.payment.period_unit
-      %p
+      %p{"data-first_payment": "#{item.id}"}
         = item.payment.first_payment
-      %p
+      %p{"data-description": "#{item.id}"}
         = item.payment.description
 
-      = link_to '編集', edit_user_item_path(current_user.id, item.id), class: "edit_item"
-      = link_to '削除', user_item_path(current_user.id, item.id), class: "delete_item", "data-delete": "#{item.id}"
+      = link_to '編集', user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}"
+      = link_to '削除', user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}"
 
 %div
-  = form_with model: @item, url: user_items_path(current_user.id), local: true, id: 'new_item' do |form|
+  = form_with model: @item, url: user_items_path(current_user.id), local: true, id: 'item_form' do |form|
     = form.label :title
-    = form.text_field :title
+    = form.text_field :title, id: 'item_title'
     = form.label :link
-    = form.text_field :link
+    = form.text_field :link, id: 'item_link'
     = form.label :color
-    = form.text_field :color
+    = form.text_field :color, id: 'item_color'
     = form.label :plan
-    = form.text_field :plan
+    = form.text_field :plan, id: 'item_plan'
     = form.label :price
-    = form.text_field :price
+    = form.text_field :price, id: 'item_price'
     = form.fields_for :payment do |pform|
       = pform.label :period_long
-      = pform.text_field  :period_long
+      = pform.text_field  :period_long, id: 'item_period_long'
       = pform.label :period_unit
-      = pform.select  :period_unit, [['---', 0], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]]
+      = pform.select  :period_unit, [['---', 0], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]], id: 'item_period_unit'
       = pform.label :first_payment
-      = pform.date_field :first_payment
+      = pform.date_field :first_payment, id: 'item_first_payment'
       = pform.label :pay_method
-      = pform.text_field  :pay_method
+      = pform.text_field  :pay_method, id: 'item_pay_method'
       = pform.label :description
-      = pform.text_area   :description
+      = pform.text_area   :description, id: 'item_description'
     = form.label :private
-    = form.check_box  :private
+    = form.check_box  :private, id: 'item_private'
     = form.submit "登録", id: 'new_item_btn'
+    = form.submit '変更する', id: 'edit_item_btn'

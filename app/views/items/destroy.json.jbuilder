@@ -1,0 +1,1 @@
+json.delete_id @item.id
