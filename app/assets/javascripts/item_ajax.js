@@ -11,6 +11,9 @@ $(document).on('turbolinks:load', function(){
                     <p data-color="${item.id}">
                       ${item.color}
                     </p>
+                    <p data-plan="${item.id}">
+                      ${item.plan}
+                    </p>
                     <p data-price="${item.id}">
                       ${item.price}
                     </p>
@@ -26,10 +29,13 @@ $(document).on('turbolinks:load', function(){
                     <p data-first_payment="${item.id}">
                       ${item.first_payment}
                     </p>
+                    <p data-pay_method="${item.id}">
+                      ${item.pay_method}
+                    </p>
                     <p data-description="${item.id}">
                       ${item.description}
                     </p>
-                    <a class="edit_item" href="/users/${item.uid}/items/${item.id}/edit">編集</a>
+                    <a class="edit_item" data-delete="${item.id}" href="/users/${item.uid}/items/${item.id}">編集</a>
                     <a class="delete_item" data-delete="${item.id}" href="/users/${item.uid}/items/${item.id}">削除</a>
                   </li>`
       return html;
@@ -47,8 +53,8 @@ $(document).on('turbolinks:load', function(){
     $(document).on('submit', '#item_form', function(e){
       e.preventDefault();
       let formData = new FormData(this);
-      let url = $(this).attr('action');
-
+      let url      = $(this).attr('action');
+      
       $.ajax({
         url: url,
         type: "POST",
@@ -79,7 +85,7 @@ $(document).on('turbolinks:load', function(){
     // 削除時の非同期処理
     $(document).on('click', '.delete_item', function(e){
       e.preventDefault();
-      let url = $(this).attr('href');
+      let url       = $(this).attr('href');
       let delete_id = $(this)[0].dataset['delete'];
 
       $.ajax({
@@ -107,10 +113,34 @@ $(document).on('turbolinks:load', function(){
     // 編集時の非同期処理
     $(document).on('click', '.edit_item', function(e){
       e.preventDefault();
-      let url = $(this).attr('href');
-      let edit_id = $(this)[0].dataset['edit'];
-
-      edit_id
+      let url                   = $(this).attr('href');
+      let edit_id               = $(this)[0].dataset['edit'];
+      let edit_title            = $("p[data-title=" + edit_id + "]").text();
+      let edit_link             = $("p[data-link=" + edit_id + "]").text();
+      let edit_color            = $("p[data-color=" + edit_id + "]").text();
+      let edit_plan             = $("p[data-plan=" + edit_id + "]").text();
+      let edit_price            = $("p[data-price=" + edit_id + "]").text();
+      let edit_private          = $("p[data-private=" + edit_id + "]").text();
+      let edit_period_long      = $("p[data-period_long=" + edit_id + "]").text();
+      let edit_period_unit      = Number($("p[data-period_unit=" + edit_id + "]").text());
+      let edit_first_payment    = $("p[data-first_payment=" + edit_id + "]").text().match(/(\d+)-(\d+)-(\d+)/);
+      let edit_pay_method       = $("p[data-pay_method=" + edit_id + "]").text();
+      let edit_description      = $("p[data-description=" + edit_id + "]").text();
+      console.log(edit_private);
+      $("#item_title").val(edit_title);
+      $("#item_link").val(edit_link);
+      $("#item_color").val(edit_color);
+      $("#item_plan").val(edit_plan);
+      $("#item_price").val(edit_price);
+      $("#item_private").prop("checked", edit_private);
+      $("#item_payment_attributes_period_long").val(edit_period_long);
+      $("#item_payment_attributes_period_unit").val(edit_period_unit);
+      $("#item_payment_attributes_first_payment").val(edit_first_payment[0]);
+      $("#item_payment_attributes_pay_method").val(edit_pay_method);
+      $("#item_payment_attributes_description").val(edit_description);
+      $("new_item_btn").val("変更する")
     });
+
+
   });
 });
