@@ -46,6 +46,6 @@ private
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:payment).find(params[:id])
   end
 end
