@@ -15,8 +15,8 @@
         = item.plan
       %p{"data-price": "#{item.id}"}
         = item.price
-      %p{"data-private": "#{item.id}"}
-        = item.private
+      %p{"data-release": "#{item.id}"}
+        = item.release
       %p{"data-period_long": "#{item.id}"}
         = item.payment.period_long
       %p{"data-period_unit": "#{item.id}"}
@@ -55,6 +55,6 @@
       = pform.text_field  :pay_method
       = pform.label :description
       = pform.text_area   :description
-    = form.label :private
-    = form.check_box  :private
+    = form.label :release
+    = form.check_box  :release
     = form.submit "登録", id: 'item_button'

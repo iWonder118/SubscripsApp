@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function () {
                     <p data-color="${item.id}">${item.color}</p>
                     <p data-plan="${item.id}">${item.plan}</p>
                     <p data-price="${item.id}">${item.price}</p>
-                    <p data-private="${item.id}">${item.private}</p>
+                    <p data-release="${item.id}">${item.release}</p>
                     <p data-period_long="${item.id}">${item.period_long}</p>
                     <p data-period_unit="${item.id}">${item.period_unit}</p>
                     <p data-first_payment="${item.id}">${item.first_payment}</p>
@@ -33,7 +33,7 @@ $(document).on('turbolinks:load', function () {
     $(document).on('click', '#new_item', function (e) {
       e.preventDefault();
       let create_href = $('#new_item').attr('href').match(/\/users\/\d+\/items/);
-      
+
       $('form').attr('action', create_href[0]);
       $('form').attr('id', 'item_form');
       $('#item_form')[0].reset();
@@ -113,7 +113,7 @@ $(document).on('turbolinks:load', function () {
       let edit_color = $("p[data-color=" + edit_id + "]").text();
       let edit_plan = $("p[data-plan=" + edit_id + "]").text();
       let edit_price = $("p[data-price=" + edit_id + "]").text();
-      let edit_private = String($("p[data-private=" + edit_id + "]").text().match(/[A-Z]{4,5}/i));
+      let edit_release = String($("p[data-release=" + edit_id + "]").text().match(/[A-Z]{4,5}/i));
       let edit_period_long = $("p[data-period_long=" + edit_id + "]").text();
       let edit_period_unit = Number($("p[data-period_unit=" + edit_id + "]").text());
       let edit_first_payment = $("p[data-first_payment=" + edit_id + "]").text().match(/(\d+)-(\d+)-(\d+)/);
@@ -130,8 +130,8 @@ $(document).on('turbolinks:load', function () {
       $("#item_payment_attributes_first_payment").val(edit_first_payment[0]);
       $("#item_payment_attributes_pay_method").val(edit_pay_method);
       $("#item_payment_attributes_description").val(edit_description);
-      if (edit_private == 'true') {
-        $("#item_private").prop("checked", true);
+      if (edit_release == 'true') {
+        $("#item_release").prop("checked", true);
       }
       $("#item_button").val("更新");
     });

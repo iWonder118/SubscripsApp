@@ -5,7 +5,7 @@ FactoryBot.define do
     color   {"orange"}
     plan    {"student"}
     price   {250}
-    private {1}
+    release  {1}
     association      :user, factory: :user
 
     after(:build) do |item|
@@ -19,7 +19,7 @@ FactoryBot.define do
     color   {"orange"}
     plan    {"student"}
     price   {250}
-    private {1}
+    release  {1}
     association      :user, factory: :user
   end
 end
