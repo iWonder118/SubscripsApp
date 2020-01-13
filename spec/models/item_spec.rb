@@ -104,15 +104,17 @@ describe Item, type: :model do
     end
 
     it "period_unitが1未満の場合、登録できないこと" do
-      item = build(:item, period_unit: 0)
-      item.valid?
-      expect(item.errors[:period_unit]).to include("は1以上の値にしてください")
+      item = build(:item)
+      item.payment = build(:payment, period_unit: 0)
+      item.payment.valid?
+      expect(item.payment.errors[:period_unit]).to include("は1以上の値にしてください")
     end
 
     it "period_unitが1000000より大きい場合、登録できないこと" do
-      item = build(:item, period_unit: 4)
-      item.valid?
-      expect(item.errors[:period_unit]).to include("は3以下の値にしてください")
+      item = build(:item)
+      item.payment = build(:payment, period_unit: 4)
+      item.payment.valid?
+      expect(item.payment.errors[:period_unit]).to include("は3以下の値にしてください")
     end
 
     it "first_paymentが未入力の場合、登録できないこと" do
