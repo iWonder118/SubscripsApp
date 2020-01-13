@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User do
+describe User, type: :model do
   describe '#create' do
     it "全ての値が適切に入力されている場合、登録できること" do
       user = build(:user)

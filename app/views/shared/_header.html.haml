@@ -1,10 +1,10 @@
 .header
   = link_to 'SubscripS','/' ,class: "header__top"
   .header-info
-    - if signed_in?
+    - if user_signed_in?
       = link_to '#', class: 'header-info__logout' do
-        = "#{@current_user.name} さん"
-      = link_to 'ログアウト', logout_path, method: :delete, class: 'header-info__logout'
+        = "#{current_user.name} さん"
+      = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'header-info__logout'
     - else
-      = link_to 'ログイン', login_path, class: 'header-info__login'
-      = link_to 'サインアップ', signup_path, class: 'header-info__signin'
+      = link_to 'ログイン', new_user_session_path, class: 'header-info__login'
+      = link_to 'サインアップ', new_user_registration_path, class: 'header-info__signin'
