@@ -41,7 +41,7 @@ describe Item, type: :model do
       title = (0...41).map { o[rand(o.length)] }.join
       item = build(:item, title: title.to_s)
       item.valid?
-      expect(item.errors[:title]).to include("は40文字以下で入力してください")
+      expect(item.errors[:title]).to include("は40文字以内で入力してください")
     end
 
   end
