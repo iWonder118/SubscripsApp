@@ -9,6 +9,6 @@ class Item < ApplicationRecord
   validates :link,    presence: true
   validates :color,   presence: true
   validates :plan,    presence: true, length: { in: 3..40 } 
-  validates :price,   presence: true, numericality: true, length: { in: 100..1000000 } 
+  validates :price,   presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 100, less_than_or_equal_to: 1000000}
   validates :private, acceptance: true
 end

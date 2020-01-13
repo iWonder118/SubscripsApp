@@ -14,13 +14,13 @@ ActiveRecord::Schema.define(version: 2020_01_10_025955) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
-    t.text "link"
-    t.string "color", null: false
-    t.string "plan", null: false
-    t.string "price", null: false
-    t.boolean "private", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "link"
+    t.string "price", null: false
+    t.boolean "private", default: false, null: false
+    t.string "plan", null: false
+    t.string "color", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
