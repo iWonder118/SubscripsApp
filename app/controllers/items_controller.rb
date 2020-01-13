@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [ :update, :destroy]
 
   def index
     @item = Item.new
@@ -18,20 +18,21 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
     if @item.update(item_params)
-      redirect_to root_path
+      respond_to do |format|
+        format.json
+      end
     else
-      render :edit
+      redirect_to root_path
     end
   end
 
   def destroy
     if @item.destroy
+      respond_to do |format|
+        format.json
+      end
     else
       redirect_to root_path
     end

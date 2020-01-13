@@ -30,9 +30,8 @@
 
       = link_to '編集', user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}"
       = link_to '削除', user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}"
-%a.create
-  %label
-    %i.fas.fa-plus
+= link_to user_items_path(current_user.id), id: 'new_item' do
+  %i.fas.fa-plus
 %div
   = form_with model: @item, url: user_items_path(current_user.id), local: true, id: 'item_form' do |form|
     = form.label :title
@@ -58,5 +57,4 @@
       = pform.text_area   :description
     = form.label :private
     = form.check_box  :private
-    = form.submit "登録", id: 'new_item_btn'
-    = form.submit '変更する', id: 'edit_item_btn'
+    = form.submit "登録", id: 'item_button'
