@@ -5,6 +5,8 @@ class Item < ApplicationRecord
   
   accepts_nested_attributes_for :payment
 
+  validates :payment , presence: true
+
   validates :title,   presence: true, length: { in: 3..40 } 
   validates :link,    presence: true
   validates :color,   presence: true
