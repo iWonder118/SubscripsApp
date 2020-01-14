@@ -31,8 +31,10 @@
         = link_to '削除', user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}"
         = link_to id: "show_button" do
           %i.fas.fa-chevron-down
-  = link_to user_items_path(current_user.id), id: 'new_item' do
-    %i.fas.fa-plus
+  = link_to user_items_path(current_user.id), id: 'new_item', class: 'item-creater' do
+    .tooltip{"aria-label": "作成", "data-microtip-position": "top", "role": "tooltip"}
+      %i.fas.fa-plus
+
 .modal-form
   = form_with model: @item, url: user_items_path(current_user.id), local: true, id: 'item_form' do |form|
     = form.label :title

@@ -1,0 +1,18 @@
+.item-creater{
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 4%;
+  right: 5%;
+  background-color: $md-red-a200;
+  color: $md-white;
+  text-align: center;
+  z-index: 1000;
+  text-decoration: none;
+
+  .fa-plus{
+    margin-top: 20px;
+    font-size: 40px;
+  }
+}
