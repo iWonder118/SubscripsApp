@@ -12,30 +12,40 @@
               %i.fas.fa-trash-alt
 
         .content
-          %p{"data-title": "#{item.id}"}
-            = item.title
-          %p{"data-link": "#{item.id}"}
-            = item.link
-          %p{"data-color": "#{item.id}"}
-            = item.color
-          %p{"data-plan": "#{item.id}"}
-            = item.plan
-          %p{"data-price": "#{item.id}"}
-            = item.price
-          %p{"data-release": "#{item.id}"}
-            = item.release
-          %p{"data-period_long": "#{item.id}"}
-            = item.payment.period_long
-          %p{"data-period_unit": "#{item.id}"}
-            = item.payment.period_unit
-          %p{"data-first_payment": "#{item.id}"}
-            = item.payment.first_payment
-          %p{"data-pay_method": "#{item.id}"}
-            = item.payment.pay_method
-          %p{"data-description": "#{item.id}"}
-            = item.payment.description
-          = link_to id: "show_button" do
-            %i.fas.fa-chevron-down
+          .content__header
+            .header-survice
+              %p{class: "header-survice__title", "data-title": "#{item.id}"}
+                = item.title
+              %p{class: "header-survice__plan", "data-plan": "#{item.id}"}
+                = item.plan
+            %p{class: "header-price", "data-price": "#{item.id}"}
+              ¥
+              = item.price
+          .show-on
+            = link_to "", class: "show-on__button", id: "show-on" do
+              .tooltip{"aria-label": "詳細を表示", "data-microtip-position": "top", "role": "tooltip"}
+                %i.fas.fa-chevron-down
+          .content__body
+            %p{"data-color": "#{item.id}"}
+              = item.color
+            %p{"data-link": "#{item.id}"}
+              = item.link
+            %p{"data-release": "#{item.id}"}
+              = item.release
+            %p{"data-period_long": "#{item.id}"}
+              = item.payment.period_long
+            %p{"data-period_unit": "#{item.id}"}
+              = item.payment.period_unit
+            %p{"data-first_payment": "#{item.id}"}
+              = item.payment.first_payment
+            %p{"data-pay_method": "#{item.id}"}
+              = item.payment.pay_method
+            %p{"data-description": "#{item.id}"}
+              = item.payment.description
+          .show-off
+            = link_to "", class: "show-off__button", id: "show-off" do
+              .tooltip{"aria-label": "詳細をしまう", "data-microtip-position": "top", "role": "tooltip"}
+                %i.fas.fa-chevron-up
   = link_to user_items_path(current_user.id), id: 'new_item', class: 'item-creater' do
     .tooltip{"aria-label": "作成", "data-microtip-position": "top", "role": "tooltip"}
       %i.fas.fa-plus
