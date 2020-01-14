@@ -2,35 +2,40 @@
 .items-main
   %ul.main-contents#result
     - @items.each do |item|
-      %li{class: "content", id: "item-#{item.id}"}
-        .content__title
-        %p{"data-title": "#{item.id}"}
-          = item.title
-        %p{"data-link": "#{item.id}"}
-          = item.link
-        %p{"data-color": "#{item.id}"}
-          = item.color
-        %p{"data-plan": "#{item.id}"}
-          = item.plan
-        %p{"data-price": "#{item.id}"}
-          = item.price
-        %p{"data-release": "#{item.id}"}
-          = item.release
-        %p{"data-period_long": "#{item.id}"}
-          = item.payment.period_long
-        %p{"data-period_unit": "#{item.id}"}
-          = item.payment.period_unit
-        %p{"data-first_payment": "#{item.id}"}
-          = item.payment.first_payment
-        %p{"data-pay_method": "#{item.id}"}
-          = item.payment.pay_method
-        %p{"data-description": "#{item.id}"}
-          = item.payment.description
+      %li{id: "item-#{item.id}"}
+        .function-buttons
+          = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}" do
+            .tooltip{"aria-label": "編集", "data-microtip-position": "top", "role": "tooltip"}
+              %i.fas.fa-edit
+          = link_to user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}" do
+            .tooltip{"aria-label": "削除", "data-microtip-position": "top", "role": "tooltip"}
+              %i.fas.fa-trash-alt
 
-        = link_to '編集', user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}"
-        = link_to '削除', user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}"
-        = link_to id: "show_button" do
-          %i.fas.fa-chevron-down
+        .content
+          %p{"data-title": "#{item.id}"}
+            = item.title
+          %p{"data-link": "#{item.id}"}
+            = item.link
+          %p{"data-color": "#{item.id}"}
+            = item.color
+          %p{"data-plan": "#{item.id}"}
+            = item.plan
+          %p{"data-price": "#{item.id}"}
+            = item.price
+          %p{"data-release": "#{item.id}"}
+            = item.release
+          %p{"data-period_long": "#{item.id}"}
+            = item.payment.period_long
+          %p{"data-period_unit": "#{item.id}"}
+            = item.payment.period_unit
+          %p{"data-first_payment": "#{item.id}"}
+            = item.payment.first_payment
+          %p{"data-pay_method": "#{item.id}"}
+            = item.payment.pay_method
+          %p{"data-description": "#{item.id}"}
+            = item.payment.description
+          = link_to id: "show_button" do
+            %i.fas.fa-chevron-down
   = link_to user_items_path(current_user.id), id: 'new_item', class: 'item-creater' do
     .tooltip{"aria-label": "作成", "data-microtip-position": "top", "role": "tooltip"}
       %i.fas.fa-plus
