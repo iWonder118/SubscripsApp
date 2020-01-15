@@ -14,11 +14,11 @@
         .content
           .content__header
             .header-survice
-              %p{class: "header-survice__title", "data-title": "#{item.id}"}
+              %p{class: "header-survice__title", "data-title": "#{item.id}", "aria-label": "サービス名", "data-microtip-position": "top", "role": "tooltip"}
                 = item.title
-              %p{class: "header-survice__plan", "data-plan": "#{item.id}"}
+              %p{class: "header-survice__plan", "data-plan": "#{item.id}", "aria-label": "プラン名", "data-microtip-position": "top", "role": "tooltip"}
                 = item.plan
-            %p{class: "header-price", "data-price": "#{item.id}"}
+            %p{class: "header-price", "data-price": "#{item.id}", "aria-label": "価格", "data-microtip-position": "top", "role": "tooltip"}
               ¥
               = item.price
           .show-on
