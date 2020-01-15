@@ -4,10 +4,10 @@
     - @items.each do |item|
       %li{id: "item-#{item.id}"}
         .function-buttons
-          = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}" do
+          = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}", remote: true do
             .tooltip{"aria-label": "編集", "data-microtip-position": "top", "role": "tooltip"}
               %i.fas.fa-edit
-          = link_to user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}" do
+          = link_to user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}", remote: true do
             .tooltip{"aria-label": "削除", "data-microtip-position": "top", "role": "tooltip"}
               %i.fas.fa-trash-alt
 
@@ -66,7 +66,7 @@
       %i.fas.fa-plus
 
 .modal-form
-  = form_with model: @item, url: user_items_path(current_user.id), local: true, id: 'item_form' do |form|
+  = form_with model: @item, url: user_items_path(current_user.id), id: 'item_form', remote: true do |form|
     = form.label :title
     = form.text_field :title
     = form.label :link
