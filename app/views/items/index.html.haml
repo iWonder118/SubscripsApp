@@ -26,22 +26,37 @@
               .tooltip{"aria-label": "詳細を表示", "data-microtip-position": "top", "role": "tooltip"}
                 %i.fas.fa-chevron-down
           .content__body
-            %p{"data-color": "#{item.id}"}
-              = item.color
-            %p{"data-link": "#{item.id}"}
-              = item.link
-            %p{"data-release": "#{item.id}"}
-              = item.release
-            %p{"data-period_long": "#{item.id}"}
-              = item.payment.period_long
-            %p{"data-period_unit": "#{item.id}"}
-              = item.payment.period_unit
-            %p{"data-first_payment": "#{item.id}"}
-              = item.payment.first_payment
-            %p{"data-pay_method": "#{item.id}"}
-              = item.payment.pay_method
-            %p{"data-description": "#{item.id}"}
-              = item.payment.description
+            %input{type: "hidden", "data-color": "#{item.id}", value: item.color}
+            .body-link
+              .body-link__label
+                登録したリンク
+              = link_to "登録したサービスサイトを確認する", item.link, class: "body-link__button", "data-link": "#{item.id}"
+            .body-period
+              .body-period__label
+                支払いタイミング
+              %p{"data-period_long": "#{item.id}"}
+                = item.payment.period_long
+              %input{type: "hidden", "data-period_unit": "#{item.id}", value: item.payment.period_unit}
+            .body-firstpayment
+              .body-firstpayment__label
+                初回支払日
+              %input{type: "hidden", "data-first_payment": "#{item.id}"}
+              %p
+                = item.payment.first_payment.strftime("%Y年%m月%d日")
+            .body-paymethod
+              .body-paymethod__label
+                支払い方法
+              %p{"data-pay_method": "#{item.id}"}
+                = item.payment.pay_method
+            .body-releace
+              .body-releace__label
+                公開設定
+              %input{type: "hidden", "data-release": "#{item.id}", value: item.release}
+            .body-description
+              .body-description__label
+                メモ
+              %p{"data-description": "#{item.id}"}
+                = item.payment.description
           .show-off
             = link_to "", class: "show-off__button", id: "show-off" do
               .tooltip{"aria-label": "詳細をしまう", "data-microtip-position": "top", "role": "tooltip"}

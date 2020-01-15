@@ -98,7 +98,8 @@
         border-style: none;
 
         &__button{
-
+          display: block;
+          
           &:hover{
             opacity: 0.75;
           }
@@ -119,6 +120,7 @@
         border-style: none;
 
         &__button{
+          display: block;
 
           &:hover{
             opacity: 0.75;
@@ -131,9 +133,106 @@
           }
         }
       }
+
       &__body{
-        height: 5%;
+        width: 100%;
         padding: 2%;
+        display: flex;
+        flex-wrap: wrap;
+
+        .body-link{
+          min-width: 50%; 
+          max-width: 50%;
+          padding: 1%;
+
+          &__label{
+            height: inherit;
+            padding: 1%;
+            border-bottom: 1px $md-grey-400 solid;
+            margin-bottom: 10px;
+          }
+
+          &__button{
+            width: 70%;
+            height: 40px;
+            display: block;
+            border-radius: 8px;
+            color: $md-blue-grey-900;
+            background-color: $md-blue-200;
+            text-decoration: none;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            border-style: none;
+
+            &:hover{
+              opacity: 0.75;
+            }
+          }
+        }
+
+        .body-period{
+          min-width: 50%; 
+          max-width: 50%; 
+          padding: 1%;
+
+          &__label{
+            height: inherit;
+            padding: 1%;
+            border-bottom: 1px $md-grey-400 solid;
+            margin-bottom: 10px;
+          }
+        }
+
+        .body-firstpayment{
+          min-width: 50%; 
+          max-width: 50%;
+          padding: 1%;
+
+          &__label{
+            height: inherit;
+            padding: 1%;
+            border-bottom: 1px $md-grey-400 solid;
+            margin-bottom: 10px;
+          }
+        }
+
+        .body-paymethod{
+          min-width: 50%; 
+          max-width: 50%; 
+          padding: 1%;
+
+          &__label{
+            padding: 1%;
+            border-bottom: 1px $md-grey-400 solid;
+            margin-bottom: 10px;
+          }
+        }
+
+        .body-releace{
+          min-width: 50%; 
+          max-width: 50%; 
+          padding: 1%;
+
+          &__label{
+            height: inherit;
+            padding: 1%;
+            border-bottom: 1px $md-grey-400 solid;
+            margin-bottom: 10px;
+          }
+        }
+
+        .body-description{
+          min-width: 100%; 
+          padding: 1%;
+
+          &__label{
+            height: inherit;
+            padding: 1%;
+            border-bottom: 1px $md-grey-400 solid;
+            margin-bottom: 10px;
+          }
+        }
       }
     }
   }
