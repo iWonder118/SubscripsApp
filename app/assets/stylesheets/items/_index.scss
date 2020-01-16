@@ -1,5 +1,6 @@
 .items-main{
   width: 70%;
+  min-height: calc(100vh - 60px);
   margin: 0 auto;
   position: relative;
 
@@ -118,7 +119,7 @@
       &__body{
         width: 100%;
         padding: 2%;
-        display: none;
+        display: flex;
         flex-wrap: wrap;
 
         .body-link{
@@ -222,7 +223,7 @@
         text-decoration: none;
         text-align: center;
         border-style: none;
-        display: none;
+        display: block;
 
         &__button{
           display: block;

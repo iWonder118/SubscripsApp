@@ -36,6 +36,7 @@
                 支払いタイミング
               %p{"data-period_long": "#{item.id}"}
                 = item.payment.period_long
+                ヶ月ごと
               %input{type: "hidden", "data-period_unit": "#{item.id}", value: item.payment.period_unit}
             .body-firstpayment
               .body-firstpayment__label
@@ -65,29 +66,96 @@
     .tooltip{"aria-label": "作成", "data-microtip-position": "top", "role": "tooltip"}
       %i.fas.fa-plus
 
-.modal-form
-  = form_with model: @item, url: user_items_path(current_user.id), id: 'item_form', remote: true do |form|
-    = form.label :title
-    = form.text_field :title
-    = form.label :link
-    = form.text_field :link
-    = form.label :color
-    = form.text_field :color
-    = form.label :plan
-    = form.text_field :plan
-    = form.label :price
-    = form.text_field :price
+.modal-window
+  = form_with model: @item, url: user_items_path(current_user.id), class: "modal-form", id: 'item_form', remote: true do |form|
+    .modal-line
+      .modal-line__labels
+        = form.label :title
+        .required
+          必須
+      = form.text_field :title, class: "modal-line__text-field"
+
+    .modal-line
+      .modal-line__labels
+        = form.label :link
+        .required
+          必須
+      = form.text_field :link, class: "modal-line__text-field"
+
+    .modal-line
+      .modal-line__labels-color
+        = form.label :color
+        .required
+          必須
+      .color-selector
+        %span.item-skin-white.active{"item-skin-data": "white"}
+        %span.item-skin-gray{"item-skin-data": "gray"}
+        %span.item-skin-red{"item-skin-data": "red"}
+        %span.item-skin-orange{"item-skin-data": "orange"}
+        %span.item-skin-yellow{"item-skin-data": "yellow"}
+        %span.item-skin-green{"item-skin-data": "green"}
+        %span.item-skin-blue{"item-skin-data": "blue"}
+        %span.item-skin-purple{"item-skin-data": "purple"}
+        %span.item-skin-pink{"item-skin-data": "pink"}
+        %span.item-skin-brown{"item-skin-data": "brown"}
+      %input{type: "hidden",id: "item_color", name: "item[color]"}
+
+    .modal-line
+      .modal-line__labels
+        = form.label :plan
+        .required
+          必須
+      = form.text_field :plan, class: "modal-line__text-field"
+
+    .modal-line
+      .modal-line__labels
+        = form.label :price
+        .required
+          必須
+      %p.price_unit
+        ¥
+      = form.text_field :price, class: "modal-line__integer"
+
     = form.fields_for :payment do |pform|
-      = pform.label :period_long
-      = pform.text_field  :period_long
-      = pform.label :period_unit
-      = pform.select  :period_unit, [['---', 0], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]]
-      = pform.label :first_payment
-      = pform.date_field :first_payment
-      = pform.label :pay_method
-      = pform.text_field  :pay_method
-      = pform.label :description
-      = pform.text_area   :description
-    = form.label :release
-    = form.check_box  :release
-    = form.submit "登録", id: 'item_button'
+      .modal-line
+        .modal-line__labels
+          = pform.label :period_long
+          .required
+            必須
+        = pform.text_field  :period_long, class: "modal-line__integer-period"
+        = pform.select :period_unit, [['---', 0], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]], {}, class: "modal-line__select"
+
+      .modal-line
+        .modal-line__labels
+          = pform.label :first_payment
+          .required
+            必須
+        = pform.date_field :first_payment, class: "modal-line__date"
+
+      .modal-line
+        .modal-line__labels
+          = pform.label :pay_method
+          .arbitrary
+            任意
+        = pform.text_field  :pay_method, class: "modal-line__text-field"
+
+      .modal-line
+        .modal-line__labels
+          = pform.label :description
+          .arbitrary
+            任意
+        = pform.text_area :description, class: "modal-line__text-area"
+
+      .modal-line
+        .modal-line__labels
+          = form.label :release
+          .required
+            必須
+        %input{type: "hidden",id: "item_release", name: "item[release]"}
+        .release-button
+          = link_to "非公開", "" , id: 'release-private', class: 'release-button__private'
+          = link_to "公開する", "", id: 'release-public', class: 'release-button__public'
+
+    .modal-form__buttons
+      = form.submit "登録", class: 'modal-submit', id: 'item_button'
+      = link_to "取り消し", "", class: 'modal-cancel', id: 'modal-close'
