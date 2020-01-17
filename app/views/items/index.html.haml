@@ -66,7 +66,7 @@
     .tooltip{"aria-label": "作成", "data-microtip-position": "top", "role": "tooltip"}
       %i.fas.fa-plus
 
-.modal-window
+.modal-window#modal-window
   = form_with model: @item, url: user_items_path(current_user.id), class: "modal-form", id: 'item_form', remote: true do |form|
     .modal-line
       .modal-line__labels

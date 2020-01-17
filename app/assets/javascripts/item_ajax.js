@@ -38,7 +38,18 @@ $(document).on('turbolinks:load', function () {
       $('form').attr('id', 'item_form');
       $('#item_form')[0].reset();
       $("#item_button").val("登録");
+      $('#modal-window').css('display', 'flex');
+      $('#new_item').css('display', 'none');
+
+
     });
+
+    $(document).on('click', '#modal-close', function (e) {
+      e.preventDefault();
+      $('#item_form')[0].reset();
+      $('#modal-window').css('display', 'none');
+      $('#new_item').css('display', 'block');
+    })
 
     // 作成時の非同期処理
     $(document).on('submit', '#item_form', function (e) {
