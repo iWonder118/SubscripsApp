@@ -40,6 +40,9 @@ $(document).on('turbolinks:load', function () {
       $("#item_button").val("登録");
       $('#modal-window').css('display', 'flex');
       $('#new_item').css('display', 'none');
+      $('#item_color').val("white");
+      $('.item-skin-white').addClass('active');
+      $('.item-skin-white').nextAll().removeClass('active');
     });
 
     //モーダルウィンドウの取り消しボタン
@@ -118,15 +121,15 @@ $(document).on('turbolinks:load', function () {
 
       let edit_id = $(this)[0].dataset['edit'];
       let edit_title = $("p[data-title=" + edit_id + "]").text();
-      let edit_link = $("p[data-link=" + edit_id + "]").text();
-      let edit_color = $("p[data-color=" + edit_id + "]").text();
       let edit_plan = $("p[data-plan=" + edit_id + "]").text();
-      let edit_price = $("p[data-price=" + edit_id + "]").text();
-      let edit_release = String($("p[data-release=" + edit_id + "]").text().match(/[A-Z]{4,5}/i));
-      let edit_period_long = $("p[data-period_long=" + edit_id + "]").text();
-      let edit_period_unit = Number($("p[data-period_unit=" + edit_id + "]").text());
-      let edit_first_payment = $("p[data-first_payment=" + edit_id + "]").text().match(/(\d+)-(\d+)-(\d+)/);
+      let edit_price = $("p[data-price=" + edit_id + "]").text().match(/\d+/);
+      let edit_link = $("a[data-link=" + edit_id + "]").attr("href");
+      let edit_color = $("input[data-color=" + edit_id + "]").val();
+      let edit_period_long = $("p[data-period_long=" + edit_id + "]").text().match(/\d+/);;
+      let edit_period_unit = Number($("input[data-period_unit=" + edit_id + "]").val());
+      let edit_first_payment = $("input[data-first_payment=" + edit_id + "]").val();
       let edit_pay_method = $("p[data-pay_method=" + edit_id + "]").text();
+      let edit_release = String($("input[data-release=" + edit_id + "]").text().match(/[A-Z]{4,5}/i));
       let edit_description = $("p[data-description=" + edit_id + "]").text();
 
       $("#item_title").val(edit_title);
@@ -136,7 +139,7 @@ $(document).on('turbolinks:load', function () {
       $("#item_price").val(edit_price);
       $("#item_payment_attributes_period_long").val(edit_period_long);
       $("#item_payment_attributes_period_unit").val(edit_period_unit);
-      $("#item_payment_attributes_first_payment").val(edit_first_payment[0]);
+      $("#item_payment_attributes_first_payment").val(edit_first_payment);
       $("#item_payment_attributes_pay_method").val(edit_pay_method);
       $("#item_payment_attributes_description").val(edit_description);
       if (edit_release == 'true') {
@@ -145,6 +148,8 @@ $(document).on('turbolinks:load', function () {
       $("#item_button").val("更新");
       $('#modal-window').css('display', 'flex');
       $('#new_item').css('display', 'none');
+      $('.item-skin').removeClass('active');
+      $(".item-skin-" + edit_color).addClass('active');
     });
 
     // 編集時の非同期処理

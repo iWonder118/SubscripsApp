@@ -4,10 +4,10 @@
     - @items.each do |item|
       %li{id: "item-#{item.id}"}
         .function-buttons
-          = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}", remote: true do
+          = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}" do
             .tooltip{"aria-label": "編集", "data-microtip-position": "top", "role": "tooltip"}
               %i.fas.fa-edit
-          = link_to user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}", remote: true do
+          = link_to user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}" do
             .tooltip{"aria-label": "削除", "data-microtip-position": "top", "role": "tooltip"}
               %i.fas.fa-trash-alt
 
@@ -41,7 +41,7 @@
             .body-firstpayment
               .body-firstpayment__label
                 初回支払日
-              %input{type: "hidden", "data-first_payment": "#{item.id}"}
+              %input{type: "hidden", "data-first_payment": "#{item.id}", value: item.payment.first_payment}
               %p
                 = item.payment.first_payment.strftime("%Y年%m月%d日")
             .body-paymethod
@@ -57,7 +57,7 @@
               .body-description__label
                 メモ
               %p{"data-description": "#{item.id}"}
-                = item.payment.description
+                = simple_format(item.payment.description)
           .show-off
             = link_to "", class: "show-off__button" do
               .tooltip{"aria-label": "詳細をしまう", "data-microtip-position": "top", "role": "tooltip"}
@@ -88,16 +88,16 @@
         .required
           必須
       .color-selector
-        %span.item-skin-white.active{"item-skin-data": "white"}
-        %span.item-skin-gray{"item-skin-data": "gray"}
-        %span.item-skin-red{"item-skin-data": "red"}
-        %span.item-skin-orange{"item-skin-data": "orange"}
-        %span.item-skin-yellow{"item-skin-data": "yellow"}
-        %span.item-skin-green{"item-skin-data": "green"}
-        %span.item-skin-blue{"item-skin-data": "blue"}
-        %span.item-skin-purple{"item-skin-data": "purple"}
-        %span.item-skin-pink{"item-skin-data": "pink"}
-        %span.item-skin-brown{"item-skin-data": "brown"}
+        %span.item-skin.item-skin-white.active{"data-item-skin": "white"}
+        %span.item-skin.item-skin-gray{"data-item-skin": "gray"}
+        %span.item-skin.item-skin-red{"data-item-skin": "red"}
+        %span.item-skin.item-skin-orange{"data-item-skin": "orange"}
+        %span.item-skin.item-skin-yellow{"data-item-skin": "yellow"}
+        %span.item-skin.item-skin-green{"data-item-skin": "green"}
+        %span.item-skin.item-skin-blue{"data-item-skin": "blue"}
+        %span.item-skin.item-skin-purple{"data-item-skin": "purple"}
+        %span.item-skin.item-skin-pink{"data-item-skin": "pink"}
+        %span.item-skin.item-skin-brown{"data-item-skin": "brown"}
       %input{type: "hidden",id: "item_color", name: "item[color]"}
 
     .modal-line
