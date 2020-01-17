@@ -243,6 +243,7 @@
           width: 50%;
           line-height: 250%;
           text-align: center;
+          background-color: $md-grey-400;
           display:  block;
           font-size: 1.2rem;
           font-weight: bold;
@@ -256,15 +257,17 @@
         }
 
         &__private{
-          background-color: $md-grey-400;
           border-top-left-radius: 8px;
           border-bottom-left-radius: 8px;
         }
 
         &__public{
-          background-color: $md-blue-400;
           border-top-right-radius: 8px;
           border-bottom-right-radius: 8px;
+        }
+
+        .selecting{
+          background-color: $md-blue-400;
         }
       }
     }
@@ -285,7 +288,7 @@
         font-weight: bold;
         color: $md-grey-100;
         text-decoration: none;
-        transition: .4s;
+        transition: .2s;
 
         &:hover{
           color: $md-blue-grey-900;

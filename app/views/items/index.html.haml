@@ -21,10 +21,12 @@
             %p{class: "header-price", "data-price": "#{item.id}", "aria-label": "価格", "data-microtip-position": "top", "role": "tooltip"}
               ¥
               = item.price
+
           .show-on
             = link_to "", class: "show-on__button" do
               .tooltip{"aria-label": "詳細を表示", "data-microtip-position": "top", "role": "tooltip"}
                 %i.fas.fa-chevron-down
+
           .content__body
             %input{type: "hidden", "data-color": "#{item.id}", value: item.color}
             .body-link
@@ -49,19 +51,27 @@
                 支払い方法
               %p{"data-pay_method": "#{item.id}"}
                 = item.payment.pay_method
-            .body-releace
-              .body-releace__label
+            .body-release
+              .body-release__label
                 公開設定
-              %input{type: "hidden", "data-release": "#{item.id}", value: item.release}
+              %input{type: "hidden", "data-release": "#{item.id}", value: item.release.to_s}
+              - if item.release
+                .body-release__display-on
+                  公開する
+              - else
+                .body-release__display-off
+                  非公開
             .body-description
               .body-description__label
                 メモ
               %p{"data-description": "#{item.id}"}
                 = simple_format(item.payment.description)
+
           .show-off
             = link_to "", class: "show-off__button" do
               .tooltip{"aria-label": "詳細をしまう", "data-microtip-position": "top", "role": "tooltip"}
                 %i.fas.fa-chevron-up
+
   = link_to user_items_path(current_user.id), id: 'new_item', class: 'item-creater' do
     .tooltip{"aria-label": "作成", "data-microtip-position": "top", "role": "tooltip"}
       %i.fas.fa-plus
@@ -154,7 +164,7 @@
         %input{type: "hidden",id: "item_release", name: "item[release]"}
         .release-button
           = link_to "非公開", "" , id: 'release-private', class: 'release-button__private'
-          = link_to "公開する", "", id: 'release-public', class: 'release-button__public'
+          = link_to "公開する", "", id: 'release-public', class: 'release-button__public selecting'
 
     .modal-form__buttons
       = form.submit "登録", class: 'modal-submit', id: 'item_button'

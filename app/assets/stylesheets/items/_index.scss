@@ -139,11 +139,13 @@
             height: 40px;
             display: block;
             border-radius: 8px;
+            margin: 0 auto;
             color: $md-blue-grey-900;
             background-color: $md-blue-200;
             text-decoration: none;
             text-align: center;
             line-height: 40px;
+            font-size: 1rem;
             font-weight: bold;
             border-style: none;
 
@@ -191,7 +193,7 @@
           }
         }
 
-        .body-releace{
+        .body-release{
           min-width: 50%; 
           max-width: 50%; 
           padding: 1%;
@@ -201,6 +203,29 @@
             padding: 1%;
             border-bottom: 1px $md-grey-400 solid;
             margin-bottom: 10px;
+          }
+
+          &__display-on{
+            width: 50%;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: $md-blue-400;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: $md-grey-100;
+          }
+
+          &__display-off{
+            width: 50%;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: $md-grey-400;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: $md-grey-100;
           }
         }
 

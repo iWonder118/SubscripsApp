@@ -42,7 +42,10 @@ $(document).on('turbolinks:load', function () {
       $('#new_item').css('display', 'none');
       $('#item_color').val("white");
       $('.item-skin-white').addClass('active');
+      $('#release-public').prev('#release-private').removeClass('selecting');
       $('.item-skin-white').nextAll().removeClass('active');
+      $('#release-public').addClass('selecting');
+      $('#item_release').val(1);
     });
 
     //モーダルウィンドウの取り消しボタン
@@ -129,7 +132,7 @@ $(document).on('turbolinks:load', function () {
       let edit_period_unit = Number($("input[data-period_unit=" + edit_id + "]").val());
       let edit_first_payment = $("input[data-first_payment=" + edit_id + "]").val();
       let edit_pay_method = $("p[data-pay_method=" + edit_id + "]").text();
-      let edit_release = String($("input[data-release=" + edit_id + "]").text().match(/[A-Z]{4,5}/i));
+      let edit_release = String($("input[data-release=" + edit_id + "]").val().match(/[A-Z]{4,5}/i));
       let edit_description = $("p[data-description=" + edit_id + "]").text();
 
       $("#item_title").val(edit_title);
@@ -142,14 +145,21 @@ $(document).on('turbolinks:load', function () {
       $("#item_payment_attributes_first_payment").val(edit_first_payment);
       $("#item_payment_attributes_pay_method").val(edit_pay_method);
       $("#item_payment_attributes_description").val(edit_description);
-      if (edit_release == 'true') {
-        $("#item_release").prop("checked", true);
-      }
       $("#item_button").val("更新");
       $('#modal-window').css('display', 'flex');
       $('#new_item').css('display', 'none');
       $('.item-skin').removeClass('active');
       $(".item-skin-" + edit_color).addClass('active');
+      if (edit_release == 'true') {
+        $('#release-public').prev('#release-private').removeClass('selecting');
+        $('#release-public').addClass('selecting');
+        $('#item_release').val(1);
+      }
+      else {
+        $('#release-private').next('#release-public').removeClass('selecting');
+        $('#release-private').addClass('selecting');
+        $('#item_release').val(0);
+      }
     });
 
     // 編集時の非同期処理
