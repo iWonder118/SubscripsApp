@@ -13,7 +13,7 @@
     height: 95%;
     width: 60%;
     padding: 2% 3%;
-    border: 20px $md-white solid;
+    border: 15px $md-white solid;
     background-color: $md-white;
     color: $md-blue-grey-900;
     border-radius: 8px;
@@ -63,10 +63,11 @@
         margin-bottom: 20px;
         display: block;
         font-size: 1.25rem;
+        text-align: right;
 
         &-period{
           height: 35px;
-          width: 18%;
+          width: 19%;
           padding: 0 10px;
           border: 2px solid $md-grey-300;
           border-radius: 8px;
@@ -75,6 +76,7 @@
           font-size: 1.25rem;
           position: absolute;
           right: 19%;
+          text-align: right;
         }
       }
 

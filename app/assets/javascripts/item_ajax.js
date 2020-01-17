@@ -146,6 +146,7 @@ $(document).on('turbolinks:load', function () {
       $("#item_button").val("登録");
       $('#modal-window').css('display', 'flex');
       $('#new_item').css('display', 'none');
+      $('#show_all_off').css('display', 'none');
       $('#item_color').val("white");
       $('.item-skin-white').addClass('active');
       $('#release-public').prev('#release-private').removeClass('selecting');
@@ -159,6 +160,7 @@ $(document).on('turbolinks:load', function () {
       e.preventDefault();
       $('#modal-window').css('display', 'none');
       $('#new_item').css('display', 'block');
+      $('#show_all_off').css('display', 'block');
     });
 
     // 作成時の非同期処理
@@ -179,8 +181,6 @@ $(document).on('turbolinks:load', function () {
 
         .done(function (data) {
           let html = buildHTML(data);
-          $('#modal-window').css('display', 'none');
-          $('#new_item').css('display', 'block');
           $('#result').append(html);
           changeItemColor(data.id);
           $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
@@ -191,6 +191,9 @@ $(document).on('turbolinks:load', function () {
         })
 
         .always(function () {
+          $('#modal-window').css('display', 'none');
+          $('#new_item').css('display', 'block');
+          $('#show_all_off').css('display', 'block');
           $('#item_button').prop("disabled", false);
           $('#item_form')[0].reset();
         })
@@ -262,6 +265,7 @@ $(document).on('turbolinks:load', function () {
       $("#item_button").val("更新");
       $('#modal-window').css('display', 'flex');
       $('#new_item').css('display', 'none');
+      $('#show_all_off').css('display', 'none');
       $('.item-skin').removeClass('active');
       $(".item-skin-" + edit_color).addClass('active');
       if (edit_release == 'true') {
@@ -296,8 +300,6 @@ $(document).on('turbolinks:load', function () {
           let update_id = $('#item-' + data.id);
 
           update_id.attr('id', 'item-' + data.id + '-remove');
-          $('#modal-window').css('display', 'none');
-          $('#new_item').css('display', 'block');
           $('#item-' + data.id + '-remove').after(html);
           $('#item-' + data.id + '-remove').remove();
           changeItemColor(data.id);
@@ -309,6 +311,9 @@ $(document).on('turbolinks:load', function () {
         })
 
         .always(function () {
+          $('#modal-window').css('display', 'none');
+          $('#new_item').css('display', 'block');
+          $('#show_all_off').css('display', 'block');
           $('#item_button').prop("disabled", false);
           $('#item_form_edit')[0].reset();
         })

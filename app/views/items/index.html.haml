@@ -64,8 +64,7 @@
             .body-description
               .body-description__label
                 メモ
-              %p{"data-description": "#{item.id}"}
-                = simple_format(item.payment.description)
+              %p{"data-description": "#{item.id}"}= item.payment.description
 
           .show-off
             = link_to "", class: "show-off__button" do
@@ -84,7 +83,7 @@
   = form_for @item, url: user_items_path(current_user.id), html:{class: "modal-form", id: 'item_form'} do |form|
     .modal-line
       .modal-line__labels
-        = form.label :title
+        = form.label :title, placeholder: "ここに入力"
         .required
           必須
       = form.text_field :title, class: "modal-line__text-field"

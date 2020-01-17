@@ -1,11 +1,18 @@
 .items-main{
-  width: 70%;
+  width: 100%;
   min-height: calc(100vh - 60px);
-  margin: 0 auto;
+
   padding-bottom: 60px;
   position: relative;
+  background: image-url('subscrips-back.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
 
   .main-contents{
+    width: 70%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 
@@ -240,6 +247,9 @@
             padding: 1%;
             border-bottom: 1px $md-grey-400 solid;
             margin-bottom: 10px;
+          }
+          p{
+            white-space:pre
           }
         }
       }
