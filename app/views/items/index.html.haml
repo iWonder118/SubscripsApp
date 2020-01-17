@@ -72,6 +72,10 @@
               .tooltip{"aria-label": "詳細をしまう", "data-microtip-position": "top", "role": "tooltip"}
                 %i.fas.fa-chevron-up
 
+  = link_to "", id: 'show_all_off', class: 'show_all_off' do
+    .tooltip{"aria-label": "全ての詳細をしまう", "data-microtip-position": "top", "role": "tooltip"}
+      %i.fas.fa-angle-double-up
+
   = link_to user_items_path(current_user.id), id: 'new_item', class: 'item-creater' do
     .tooltip{"aria-label": "作成", "data-microtip-position": "top", "role": "tooltip"}
       %i.fas.fa-plus
