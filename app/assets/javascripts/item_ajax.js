@@ -107,7 +107,7 @@ $(document).on('turbolinks:load', function () {
         })
     });
 
-    // 編集ボタンを押したときのプリセット処理
+    // 編集ボタンを押したときのプリセット処理とモーダルウィンドウ表示
     $(document).on('click', '.edit_item', function (e) {
       e.preventDefault();
       let edit_href = $(this).attr('href');
@@ -143,6 +143,8 @@ $(document).on('turbolinks:load', function () {
         $("#item_release").prop("checked", true);
       }
       $("#item_button").val("更新");
+      $('#modal-window').css('display', 'flex');
+      $('#new_item').css('display', 'none');
     });
 
     // 編集時の非同期処理

@@ -22,7 +22,7 @@
               ¥
               = item.price
           .show-on
-            = link_to "", class: "show-on__button", id: "show-on" do
+            = link_to "", class: "show-on__button" do
               .tooltip{"aria-label": "詳細を表示", "data-microtip-position": "top", "role": "tooltip"}
                 %i.fas.fa-chevron-down
           .content__body
@@ -59,7 +59,7 @@
               %p{"data-description": "#{item.id}"}
                 = item.payment.description
           .show-off
-            = link_to "", class: "show-off__button", id: "show-off" do
+            = link_to "", class: "show-off__button" do
               .tooltip{"aria-label": "詳細をしまう", "data-microtip-position": "top", "role": "tooltip"}
                 %i.fas.fa-chevron-up
   = link_to user_items_path(current_user.id), id: 'new_item', class: 'item-creater' do
