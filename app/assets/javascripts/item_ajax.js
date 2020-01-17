@@ -1,22 +1,128 @@
 $(document).on('turbolinks:load', function () {
   $(function () {
+    //非同期時に追加するHTML
     function buildHTML(item) {
-      let html = `<li id="item-${item.id}"> 
-                    <p data-title="${item.id}">${item.title}</p>
-                    <p data-link="${item.id}">${item.link}</p>
-                    <p data-color="${item.id}">${item.color}</p>
-                    <p data-plan="${item.id}">${item.plan}</p>
-                    <p data-price="${item.id}">${item.price}</p>
-                    <p data-release="${item.id}">${item.release}</p>
-                    <p data-period_long="${item.id}">${item.period_long}</p>
-                    <p data-period_unit="${item.id}">${item.period_unit}</p>
-                    <p data-first_payment="${item.id}">${item.first_payment}</p>
-                    <p data-pay_method="${item.id}">${item.pay_method}</p>
-                    <p data-description="${item.id}">${item.description}</p>
-                    <a class="edit_item" data-edit="${item.id}" href="/users/${item.uid}/items/${item.id}">編集</a>
-                    <a class="delete_item" data-delete="${item.id}" href="/users/${item.uid}/items/${item.id}">削除</a>
+      let html = `
+                  </li>
+                  <li id="item-${item.id}">
+                    <div class='function-buttons'>
+                      <a class="edit_item" data-edit="${item.id}" href="/users/${item.uid}/items/${item.id}">
+                        <div aria-label='編集' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-edit'></i> </div>
+                      </a>
+                      <a class="delete_item"  data-delete="${item.id}" rel="nofollow" data-method="delete" href="/users/${item.uid}/items/${item.id}">
+                        <div aria-label='削除' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-trash-alt'></i> </div>
+                      </a>
+                    </div>
+                    <div class='content'>
+                      <div class='content__header'>
+                        <div class='header-survice'>
+                          <p aria-label='サービス名' class='header-survice__title' data-microtip-position='top' data-title="${item.id}" role='tooltip'>${item.title}</p>
+                          <p aria-label='プラン名' class='header-survice__plan' data-microtip-position='top' data-plan="${item.id}" role='tooltip'>${item.plan}</p>
+                        </div>
+                        <p aria-label='価格' class='header-price' data-microtip-position='top' data-price="${item.id}" role='tooltip'> ¥${item.price}</p>
+                      </div>
+                      <div class='show-on'>
+                        <a class="show-on__button" href="">
+                          <div aria-label='詳細を表示' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-chevron-down'></i> </div>
+                        </a>
+                      </div>
+                      <div class='content__body'> <input data-color="${item.id}" type='hidden' value="${item.color}">
+                        <div class='body-link'>
+                          <div class='body-link__label'> 登録したリンク </div> <a class="body-link__button" data-link="${item.id}" href="${item.link}">登録したサービスサイトを確認する</a> </div>
+                        <div class='body-period'>
+                          <div class='body-period__label'> 支払いタイミング </div>
+                          <p data-period_long="${item.id}">${item.period_long}ヶ月ごと </p> <input data-period_unit="${item.id}" type='hidden' value="${item.period_unit}"> </div>
+                        <div class='body-firstpayment'>
+                          <div class='body-firstpayment__label'> 初回支払日 </div> <input data-first_payment="${item.id}" type='hidden' value=${item.first_payment}>
+                          <p>${item.first_payment}</p>
+                        </div>
+                        <div class='body-paymethod'>
+                          <div class='body-paymethod__label'> 支払い方法 </div>
+                          <p data-pay_method="${item.id}">${item.pay_method}</p>
+                        </div>
+                        <div class='body-release'>
+                          <div class='body-release__label'> 公開設定 </div> <input data-release="${item.id}" type='hidden' ${item.release}>
+                          ${item.release ? "<div class='body-release__display-on'> 公開中 </div>" : "<div class='body-release__display-off'> 非公開 </div>"}
+                        </div>
+                        <div class='body-description'>
+                          <div class='body-description__label'> メモ </div>
+                          <p data-description="${item.id}">
+                            <p>${item.description}</p>
+                          </p>
+                        </div>
+                      </div>
+                      <div class='show-off'>
+                        <a class="show-off__button" href="">
+                          <div aria-label='詳細をしまう' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-chevron-up'></i> </div>
+                        </a>
+                      </div>
+                    </div>
                   </li>`
       return html;
+    }
+    //非同期で追加されたアイテムにイメージカラーへ変更する処理
+    function changeItemColor(id) {
+      let change_item_color = $('input[data-color=' + id + ']').val();
+      if (change_item_color == 'grey') {
+        $('li#item-' + id).children('.content').css('borderColor', '#eeeeee');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#eeeeee');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#eeeeee');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#eeeeee');
+      }
+      else if (change_item_color == 'red') {
+        $('li#item-' + id).children('.content').css('borderColor', '#ef9a9a');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ef9a9a');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ef9a9a');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ef9a9a');
+      }
+      else if (change_item_color == 'orange') {
+        $('li#item-' + id).children('.content').css('borderColor', '#ffcc80');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ffcc80');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ffcc80');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ffcc80');
+      }
+      else if (change_item_color == 'yellow') {
+        $('li#item-' + id).children('.content').css('borderColor', '#fff59d');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#fff59d');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#fff59d');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#fff59d');
+      }
+      else if (change_item_color == 'green') {
+        $('li#item-' + id).children('.content').css('borderColor', '#a5d6a7');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#a5d6a7');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#a5d6a7');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#a5d6a7');
+      }
+      else if (change_item_color == 'blue') {
+        $('li#item-' + id).children('.content').css('borderColor', '#90caf9');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#90caf9');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#90caf9');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#90caf9');
+      }
+      else if (change_item_color == 'purple') {
+        $('li#item-' + id).children('.content').css('borderColor', '#ce93d8');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ce93d8');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ce93d8');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ce93d8');
+      }
+      else if (change_item_color == 'pink') {
+        $('li#item-' + id).children('.content').css('borderColor', '#f48fb1');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#f48fb1');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#f48fb1');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#f48fb1');
+      }
+      else if (change_item_color == 'brown') {
+        $('li#item-' + id).children('.content').css('borderColor', '#bcaaa4');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#bcaaa4');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#bcaaa4');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#bcaaa4');
+      }
+      else {
+        $('li#item-' + id).children('.content').css('borderColor', '#ffffff');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ffffff');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ffffff');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ffffff');
+      }
     }
 
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
@@ -29,7 +135,7 @@ $(document).on('turbolinks:load', function () {
       }
     });
 
-    // 作成ボタンを押したときのリセット処理
+    // 作成ボタンを押したときのリセット処理とモーダルウィンドウ表示
     $(document).on('click', '#new_item', function (e) {
       e.preventDefault();
       let create_href = $('#new_item').attr('href').match(/\/users\/\d+\/items/);
@@ -38,11 +144,29 @@ $(document).on('turbolinks:load', function () {
       $('form').attr('id', 'item_form');
       $('#item_form')[0].reset();
       $("#item_button").val("登録");
+      $('#modal-window').css('display', 'flex');
+      $('#new_item').css('display', 'none');
+      $('#show_all_off').css('display', 'none');
+      $('#item_color').val("white");
+      $('.item-skin-white').addClass('active');
+      $('#release-public').prev('#release-private').removeClass('selecting');
+      $('.item-skin-white').nextAll().removeClass('active');
+      $('#release-public').addClass('selecting');
+      $('#item_release').val(1);
+    });
+
+    //モーダルウィンドウの取り消しボタン
+    $(document).on('click', '#modal-close', function (e) {
+      e.preventDefault();
+      $('#modal-window').css('display', 'none');
+      $('#new_item').css('display', 'block');
+      $('#show_all_off').css('display', 'block');
     });
 
     // 作成時の非同期処理
     $(document).on('submit', '#item_form', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       let formData = new FormData(this);
       let create_url = $(this).attr('action');
 
@@ -58,6 +182,7 @@ $(document).on('turbolinks:load', function () {
         .done(function (data) {
           let html = buildHTML(data);
           $('#result').append(html);
+          changeItemColor(data.id);
           $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
         })
 
@@ -66,14 +191,19 @@ $(document).on('turbolinks:load', function () {
         })
 
         .always(function () {
+          $('#modal-window').css('display', 'none');
+          $('#new_item').css('display', 'block');
+          $('#show_all_off').css('display', 'block');
           $('#item_button').prop("disabled", false);
           $('#item_form')[0].reset();
         })
-    })
+      return false;
+    });
 
     // 削除時の非同期処理
     $(document).on('click', '.delete_item', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       let delete_url = $(this).attr('href');
       let delete_id = $(this)[0].dataset['delete'];
 
@@ -96,11 +226,13 @@ $(document).on('turbolinks:load', function () {
         .fail(function () {
           alert('削除にに失敗しました');
         })
+      return false;
     });
 
-    // 編集ボタンを押したときのプリセット処理
+    // 編集ボタンを押したときのプリセット処理とモーダルウィンドウ表示
     $(document).on('click', '.edit_item', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       let edit_href = $(this).attr('href');
 
       $('form').attr('action', edit_href);
@@ -109,15 +241,15 @@ $(document).on('turbolinks:load', function () {
 
       let edit_id = $(this)[0].dataset['edit'];
       let edit_title = $("p[data-title=" + edit_id + "]").text();
-      let edit_link = $("p[data-link=" + edit_id + "]").text();
-      let edit_color = $("p[data-color=" + edit_id + "]").text();
       let edit_plan = $("p[data-plan=" + edit_id + "]").text();
-      let edit_price = $("p[data-price=" + edit_id + "]").text();
-      let edit_release = String($("p[data-release=" + edit_id + "]").text().match(/[A-Z]{4,5}/i));
-      let edit_period_long = $("p[data-period_long=" + edit_id + "]").text();
-      let edit_period_unit = Number($("p[data-period_unit=" + edit_id + "]").text());
-      let edit_first_payment = $("p[data-first_payment=" + edit_id + "]").text().match(/(\d+)-(\d+)-(\d+)/);
+      let edit_price = $("p[data-price=" + edit_id + "]").text().match(/\d+/);
+      let edit_link = $("a[data-link=" + edit_id + "]").attr("href");
+      let edit_color = $("input[data-color=" + edit_id + "]").val();
+      let edit_period_long = $("p[data-period_long=" + edit_id + "]").text().match(/\d+/);;
+      let edit_period_unit = Number($("input[data-period_unit=" + edit_id + "]").val());
+      let edit_first_payment = $("input[data-first_payment=" + edit_id + "]").val();
       let edit_pay_method = $("p[data-pay_method=" + edit_id + "]").text();
+      let edit_release = String($("input[data-release=" + edit_id + "]").val().match(/[A-Z]{4,5}/i));
       let edit_description = $("p[data-description=" + edit_id + "]").text();
 
       $("#item_title").val(edit_title);
@@ -127,13 +259,25 @@ $(document).on('turbolinks:load', function () {
       $("#item_price").val(edit_price);
       $("#item_payment_attributes_period_long").val(edit_period_long);
       $("#item_payment_attributes_period_unit").val(edit_period_unit);
-      $("#item_payment_attributes_first_payment").val(edit_first_payment[0]);
+      $("#item_payment_attributes_first_payment").val(edit_first_payment);
       $("#item_payment_attributes_pay_method").val(edit_pay_method);
       $("#item_payment_attributes_description").val(edit_description);
-      if (edit_release == 'true') {
-        $("#item_release").prop("checked", true);
-      }
       $("#item_button").val("更新");
+      $('#modal-window').css('display', 'flex');
+      $('#new_item').css('display', 'none');
+      $('#show_all_off').css('display', 'none');
+      $('.item-skin').removeClass('active');
+      $(".item-skin-" + edit_color).addClass('active');
+      if (edit_release == 'true') {
+        $('#release-public').prev('#release-private').removeClass('selecting');
+        $('#release-public').addClass('selecting');
+        $('#item_release').val(1);
+      }
+      else {
+        $('#release-private').next('#release-public').removeClass('selecting');
+        $('#release-private').addClass('selecting');
+        $('#item_release').val(0);
+      }
     });
 
     // 編集時の非同期処理
@@ -158,6 +302,7 @@ $(document).on('turbolinks:load', function () {
           update_id.attr('id', 'item-' + data.id + '-remove');
           $('#item-' + data.id + '-remove').after(html);
           $('#item-' + data.id + '-remove').remove();
+          changeItemColor(data.id);
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);
         })
 
@@ -166,9 +311,13 @@ $(document).on('turbolinks:load', function () {
         })
 
         .always(function () {
+          $('#modal-window').css('display', 'none');
+          $('#new_item').css('display', 'block');
+          $('#show_all_off').css('display', 'block');
           $('#item_button').prop("disabled", false);
           $('#item_form_edit')[0].reset();
         })
-    })
+      return false;
+    });
   });
 });

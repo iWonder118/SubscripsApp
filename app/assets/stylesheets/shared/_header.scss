@@ -2,13 +2,13 @@
   height: 60px;
   width: 100vw;
   padding: 10px 10px;
-  background-color: #64b5f6;
+  background-color: $md-blue-300;
   display: flex;
   justify-content: space-between;
 
   &__top{
     font-size: 1.75rem;
-    color: white;
+    color: $md-white;
     display: block;
     text-decoration: none;
     padding: 3px 10px;
@@ -27,7 +27,7 @@
 
     a{
       font-size: 1.3rem;
-      color: white;
+      color: $md-white;
       text-decoration: none;
       display: block;
       padding: 5px 10px;

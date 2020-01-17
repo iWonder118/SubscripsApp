@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      item: サービス
+      payment: 支払い
     attributes:
       user:
         id: ID
@@ -11,3 +13,15 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+      item:
+        title: サービス名
+        link: リンク先
+        color: イメージカラー
+        plan: 契約プラン
+        price: 価格
+        release: 公開設定
+      payment:
+        period_long: 支払い間隔
+        first_payment: 初回支払日
+        pay_method: 支払い方法
+        description: メモ

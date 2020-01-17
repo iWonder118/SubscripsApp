@@ -1,0 +1,18 @@
+.show_all_off{
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 20%;
+  right: 5%;
+  background-color: $md-indigo-a200;
+  color: $md-white;
+  text-align: center;
+  z-index: 1000;
+  text-decoration: none;
+
+  .fa-angle-double-up{
+    margin-top: 20px;
+    font-size: 40px;
+  }
+}
