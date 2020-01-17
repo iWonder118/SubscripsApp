@@ -94,11 +94,12 @@ $(document).on('turbolinks:load', function () {
       e.preventDefault();
       $('#modal-window').css('display', 'none');
       $('#new_item').css('display', 'block');
-    })
+    });
 
     // 作成時の非同期処理
     $(document).on('submit', '#item_form', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       let formData = new FormData(this);
       let create_url = $(this).attr('action');
 
@@ -127,11 +128,13 @@ $(document).on('turbolinks:load', function () {
           $('#item_button').prop("disabled", false);
           $('#item_form')[0].reset();
         })
-    })
+      return false;
+    });
 
     // 削除時の非同期処理
     $(document).on('click', '.delete_item', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       let delete_url = $(this).attr('href');
       let delete_id = $(this)[0].dataset['delete'];
 
@@ -154,11 +157,13 @@ $(document).on('turbolinks:load', function () {
         .fail(function () {
           alert('削除にに失敗しました');
         })
+      return false;
     });
 
     // 編集ボタンを押したときのプリセット処理とモーダルウィンドウ表示
     $(document).on('click', '.edit_item', function (e) {
       e.preventDefault();
+      e.stopPropagation();
       let edit_href = $(this).attr('href');
 
       $('form').attr('action', edit_href);
@@ -240,6 +245,7 @@ $(document).on('turbolinks:load', function () {
           $('#item_button').prop("disabled", false);
           $('#item_form_edit')[0].reset();
         })
-    })
+      return false;
+    });
   });
 });

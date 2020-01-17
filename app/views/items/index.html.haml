@@ -7,7 +7,7 @@
           = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}" do
             .tooltip{"aria-label": "編集", "data-microtip-position": "top", "role": "tooltip"}
               %i.fas.fa-edit
-          = link_to user_item_path(current_user.id, item.id), method: :delete, class: "delete_item", "data-delete": "#{item.id}" do
+          %a{class: "delete_item", "data-delete": "#{item.id}", href: user_item_path(current_user.id, item.id)}
             .tooltip{"aria-label": "削除", "data-microtip-position": "top", "role": "tooltip"}
               %i.fas.fa-trash-alt
 
@@ -81,7 +81,7 @@
       %i.fas.fa-plus
 
 .modal-window#modal-window
-  = form_with model: @item, url: user_items_path(current_user.id), class: "modal-form", id: 'item_form', remote: true do |form|
+  = form_for @item, url: user_items_path(current_user.id), html:{class: "modal-form", id: 'item_form'} do |form|
     .modal-line
       .modal-line__labels
         = form.label :title
