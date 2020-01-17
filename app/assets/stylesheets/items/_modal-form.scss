@@ -12,7 +12,8 @@
   .modal-form{
     height: 95%;
     width: 60%;
-    padding: 3% 4%;
+    padding: 2% 3%;
+    border: 20px $md-white solid;
     background-color: $md-white;
     color: $md-blue-grey-900;
     border-radius: 8px;
@@ -147,7 +148,7 @@
           background-color: $md-white;
         }
 
-        .item-skin-gray{
+        .item-skin-grey{
           height: 35px;
           width: 35px;
           border: 1px $md-grey-400 solid;

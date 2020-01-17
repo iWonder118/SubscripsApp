@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function () {
   $(function () {
+    //非同期時に追加するHTML
     function buildHTML(item) {
       let html = `
                   </li>
@@ -59,6 +60,70 @@ $(document).on('turbolinks:load', function () {
                   </li>`
       return html;
     }
+    //非同期で追加されたアイテムにイメージカラーへ変更する処理
+    function changeItemColor(id) {
+      let change_item_color = $('input[data-color=' + id + ']').val();
+      if (change_item_color == 'grey') {
+        $('li#item-' + id).children('.content').css('borderColor', '#eeeeee');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#eeeeee');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#eeeeee');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#eeeeee');
+      }
+      else if (change_item_color == 'red') {
+        $('li#item-' + id).children('.content').css('borderColor', '#ef9a9a');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ef9a9a');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ef9a9a');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ef9a9a');
+      }
+      else if (change_item_color == 'orange') {
+        $('li#item-' + id).children('.content').css('borderColor', '#ffcc80');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ffcc80');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ffcc80');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ffcc80');
+      }
+      else if (change_item_color == 'yellow') {
+        $('li#item-' + id).children('.content').css('borderColor', '#fff59d');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#fff59d');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#fff59d');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#fff59d');
+      }
+      else if (change_item_color == 'green') {
+        $('li#item-' + id).children('.content').css('borderColor', '#a5d6a7');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#a5d6a7');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#a5d6a7');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#a5d6a7');
+      }
+      else if (change_item_color == 'blue') {
+        $('li#item-' + id).children('.content').css('borderColor', '#90caf9');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#90caf9');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#90caf9');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#90caf9');
+      }
+      else if (change_item_color == 'purple') {
+        $('li#item-' + id).children('.content').css('borderColor', '#ce93d8');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ce93d8');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ce93d8');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ce93d8');
+      }
+      else if (change_item_color == 'pink') {
+        $('li#item-' + id).children('.content').css('borderColor', '#f48fb1');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#f48fb1');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#f48fb1');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#f48fb1');
+      }
+      else if (change_item_color == 'brown') {
+        $('li#item-' + id).children('.content').css('borderColor', '#bcaaa4');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#bcaaa4');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#bcaaa4');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#bcaaa4');
+      }
+      else {
+        $('li#item-' + id).children('.content').css('borderColor', '#ffffff');
+        $('li#item-' + id).children().children('.content__header').css('backgroundColor', '#ffffff');
+        $('li#item-' + id).children().children('.show-on').css('backgroundColor', '#ffffff');
+        $('a[data-link=' + id + ']').css('backgroundColor', '#ffffff');
+      }
+    }
 
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
       let token;
@@ -117,6 +182,7 @@ $(document).on('turbolinks:load', function () {
           $('#modal-window').css('display', 'none');
           $('#new_item').css('display', 'block');
           $('#result').append(html);
+          changeItemColor(data.id);
           $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
         })
 
@@ -234,6 +300,7 @@ $(document).on('turbolinks:load', function () {
           $('#new_item').css('display', 'block');
           $('#item-' + data.id + '-remove').after(html);
           $('#item-' + data.id + '-remove').remove();
+          changeItemColor(data.id);
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);
         })
 
