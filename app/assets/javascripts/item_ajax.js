@@ -1,20 +1,61 @@
 $(document).on('turbolinks:load', function () {
   $(function () {
     function buildHTML(item) {
-      let html = `<li id="item-${item.id}"> 
-                    <p data-title="${item.id}">${item.title}</p>
-                    <p data-link="${item.id}">${item.link}</p>
-                    <p data-color="${item.id}">${item.color}</p>
-                    <p data-plan="${item.id}">${item.plan}</p>
-                    <p data-price="${item.id}">${item.price}</p>
-                    <p data-release="${item.id}">${item.release}</p>
-                    <p data-period_long="${item.id}">${item.period_long}</p>
-                    <p data-period_unit="${item.id}">${item.period_unit}</p>
-                    <p data-first_payment="${item.id}">${item.first_payment}</p>
-                    <p data-pay_method="${item.id}">${item.pay_method}</p>
-                    <p data-description="${item.id}">${item.description}</p>
-                    <a class="edit_item" data-edit="${item.id}" href="/users/${item.uid}/items/${item.id}">編集</a>
-                    <a class="delete_item" data-delete="${item.id}" href="/users/${item.uid}/items/${item.id}">削除</a>
+      let html = `
+                  </li>
+                  <li id="item-${item.id}">
+                    <div class='function-buttons'>
+                      <a class="edit_item" data-edit="${item.id}" href="/users/${item.uid}/items/${item.id}">
+                        <div aria-label='編集' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-edit'></i> </div>
+                      </a>
+                      <a class="delete_item"  data-delete="${item.id}" rel="nofollow" data-method="delete" href="/users/${item.uid}/items/${item.id}">
+                        <div aria-label='削除' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-trash-alt'></i> </div>
+                      </a>
+                    </div>
+                    <div class='content'>
+                      <div class='content__header'>
+                        <div class='header-survice'>
+                          <p aria-label='サービス名' class='header-survice__title' data-microtip-position='top' data-title="${item.id}" role='tooltip'>${item.title}</p>
+                          <p aria-label='プラン名' class='header-survice__plan' data-microtip-position='top' data-plan="${item.id}" role='tooltip'>${item.plan}</p>
+                        </div>
+                        <p aria-label='価格' class='header-price' data-microtip-position='top' data-price="${item.id}" role='tooltip'> ¥${item.price}</p>
+                      </div>
+                      <div class='show-on'>
+                        <a class="show-on__button" href="">
+                          <div aria-label='詳細を表示' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-chevron-down'></i> </div>
+                        </a>
+                      </div>
+                      <div class='content__body'> <input data-color="${item.id}" type='hidden' value="${item.color}">
+                        <div class='body-link'>
+                          <div class='body-link__label'> 登録したリンク </div> <a class="body-link__button" data-link="${item.id}" href="${item.link}">登録したサービスサイトを確認する</a> </div>
+                        <div class='body-period'>
+                          <div class='body-period__label'> 支払いタイミング </div>
+                          <p data-period_long="${item.id}">${item.period_long}ヶ月ごと </p> <input data-period_unit="${item.id}" type='hidden' value="${item.period_unit}"> </div>
+                        <div class='body-firstpayment'>
+                          <div class='body-firstpayment__label'> 初回支払日 </div> <input data-first_payment="${item.id}" type='hidden' value=${item.first_payment}>
+                          <p>${item.first_payment}</p>
+                        </div>
+                        <div class='body-paymethod'>
+                          <div class='body-paymethod__label'> 支払い方法 </div>
+                          <p data-pay_method="${item.id}">${item.pay_method}</p>
+                        </div>
+                        <div class='body-release'>
+                          <div class='body-release__label'> 公開設定 </div> <input data-release="${item.id}" type='hidden' ${item.release}>
+                          ${item.release ? "<div class='body-release__display-on'> 公開中 </div>" : "<div class='body-release__display-off'> 非公開 </div>"}
+                        </div>
+                        <div class='body-description'>
+                          <div class='body-description__label'> メモ </div>
+                          <p data-description="${item.id}">
+                            <p>${item.description}</p>
+                          </p>
+                        </div>
+                      </div>
+                      <div class='show-off'>
+                        <a class="show-off__button" href="">
+                          <div aria-label='詳細をしまう' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-chevron-up'></i> </div>
+                        </a>
+                      </div>
+                    </div>
                   </li>`
       return html;
     }
@@ -72,6 +113,8 @@ $(document).on('turbolinks:load', function () {
 
         .done(function (data) {
           let html = buildHTML(data);
+          $('#modal-window').css('display', 'none');
+          $('#new_item').css('display', 'block');
           $('#result').append(html);
           $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
         })
@@ -182,6 +225,8 @@ $(document).on('turbolinks:load', function () {
           let update_id = $('#item-' + data.id);
 
           update_id.attr('id', 'item-' + data.id + '-remove');
+          $('#modal-window').css('display', 'none');
+          $('#new_item').css('display', 'block');
           $('#item-' + data.id + '-remove').after(html);
           $('#item-' + data.id + '-remove').remove();
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);
