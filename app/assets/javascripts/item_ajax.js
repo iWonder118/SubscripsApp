@@ -29,7 +29,7 @@ $(document).on('turbolinks:load', function () {
       }
     });
 
-    // 作成ボタンを押したときのリセット処理
+    // 作成ボタンを押したときのリセット処理とモーダルウィンドウ表示
     $(document).on('click', '#new_item', function (e) {
       e.preventDefault();
       let create_href = $('#new_item').attr('href').match(/\/users\/\d+\/items/);
@@ -40,13 +40,11 @@ $(document).on('turbolinks:load', function () {
       $("#item_button").val("登録");
       $('#modal-window').css('display', 'flex');
       $('#new_item').css('display', 'none');
-
-
     });
 
+    //モーダルウィンドウの取り消しボタン
     $(document).on('click', '#modal-close', function (e) {
       e.preventDefault();
-      $('#item_form')[0].reset();
       $('#modal-window').css('display', 'none');
       $('#new_item').css('display', 'block');
     })
