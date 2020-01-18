@@ -7,6 +7,10 @@ class ItemsController < ApplicationController
     @items = Item.includes(:payment).where(user_id: current_user.id)
   end
 
+  def show
+    @share = Item.find(params[:id])
+  end
+
   def create
     @item = Item.new(item_params)
     if @item.save
