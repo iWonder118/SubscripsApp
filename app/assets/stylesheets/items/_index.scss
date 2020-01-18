@@ -84,11 +84,12 @@
         justify-content: space-between;
 
         .header-survice{
+          width: 70%;
           display: flex;
-          align-items: flex-end;
+          align-items: flex-start;
 
           &__plan{
-            padding-left: 5%;
+            margin-left: 5%;
             font-size: 1.25rem;
           }
         }

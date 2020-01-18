@@ -4,12 +4,12 @@ $(document).on('turbolinks:load', function () {
     function buildHTML(item) {
       let html = `
                   </li>
-                  <li id="item-${item.id}">
+                  <li class="item" id="item-${item.id}">
                     <div class='function-buttons'>
                       <a class="edit_item" data-edit="${item.id}" href="/users/${item.uid}/items/${item.id}">
                         <div aria-label='編集' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-edit'></i> </div>
                       </a>
-                      <a class="delete_item"  data-delete="${item.id}" rel="nofollow" data-method="delete" href="/users/${item.uid}/items/${item.id}">
+                      <a class="delete_item"  data-delete="${item.id}" href="/users/${item.uid}/items/${item.id}">
                         <div aria-label='削除' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-trash-alt'></i> </div>
                       </a>
                     </div>
@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function () {
                           <p aria-label='サービス名' class='header-survice__title' data-microtip-position='top' data-title="${item.id}" role='tooltip'>${item.title}</p>
                           <p aria-label='プラン名' class='header-survice__plan' data-microtip-position='top' data-plan="${item.id}" role='tooltip'>${item.plan}</p>
                         </div>
-                        <p aria-label='価格' class='header-price' data-microtip-position='top' data-price="${item.id}" role='tooltip'> ¥${item.price}</p>
+                        <p aria-label='価格' class='header-price' data-microtip-position='top' data-price="${item.id}" role='tooltip'>¥ ${item.price}</p>
                       </div>
                       <div class='show-on'>
                         <a class="show-on__button" href="">
@@ -60,6 +60,7 @@ $(document).on('turbolinks:load', function () {
                   </li>`
       return html;
     }
+
     //非同期で追加されたアイテムにイメージカラーへ変更する処理
     function changeItemColor(id) {
       let change_item_color = $('input[data-color=' + id + ']').val();
@@ -125,6 +126,11 @@ $(document).on('turbolinks:load', function () {
       }
     }
 
+    //数字から円表記の文字列に変換
+    function changeYen(num) {
+      return '¥' + String(num).split("").reverse().join("").match(/\d{1,3}/g).join(",").split("").reverse().join("");
+    }
+
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
       let token;
       if (!options.crossDomain) {
@@ -151,6 +157,7 @@ $(document).on('turbolinks:load', function () {
       $('.item-skin-white').addClass('active');
       $('#release-public').prev('#release-private').removeClass('selecting');
       $('.item-skin-white').nextAll().removeClass('active');
+      $('.modal-form').css('borderColor', '#ffffff');
       $('#release-public').addClass('selecting');
       $('#item_release').val(1);
     });
@@ -180,9 +187,12 @@ $(document).on('turbolinks:load', function () {
       })
 
         .done(function (data) {
+          let now_fee = Number($('#total_fee').text().replace(/[^0-9]/g, ''));
           let html = buildHTML(data);
           $('#result').append(html);
           changeItemColor(data.id);
+          $('#total_fee').text(changeYen(now_fee + Number(data.price)));
+          $('#total_service').text($('.item:visible').length);
           $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
         })
 
@@ -220,7 +230,10 @@ $(document).on('turbolinks:load', function () {
       })
 
         .done(function (data) {
+          let now_fee = Number($('#total_fee').text().replace(/[^0-9]/g, ''));
           $("#item-" + data.delete_id).remove();
+          $('#total_fee').text(changeYen(now_fee - Number(data.price)));
+          $('#total_service').text($('.item:visible').length);
         })
 
         .fail(function () {
@@ -268,6 +281,36 @@ $(document).on('turbolinks:load', function () {
       $('#show_all_off').css('display', 'none');
       $('.item-skin').removeClass('active');
       $(".item-skin-" + edit_color).addClass('active');
+      if (edit_color == 'grey') {
+        $('.modal-form').css('borderColor', '#eeeeee');
+      }
+      else if (edit_color == 'red') {
+        $('.modal-form').css('borderColor', '#ef9a9a');
+      }
+      else if (edit_color == 'orange') {
+        $('.modal-form').css('borderColor', '#ffcc80');
+      }
+      else if (edit_color == 'yellow') {
+        $('.modal-form').css('borderColor', '#fff59d');
+      }
+      else if (edit_color == 'green') {
+        $('.modal-form').css('borderColor', '#a5d6a7');
+      }
+      else if (edit_color == 'blue') {
+        $('.modal-form').css('borderColor', '#90caf9');
+      }
+      else if (edit_color == 'purple') {
+        $('.modal-form').css('borderColor', '#ce93d8');
+      }
+      else if (edit_color == 'pink') {
+        $('.modal-form').css('borderColor', '#f48fb1');
+      }
+      else if (edit_color == 'brown') {
+        $('.modal-form').css('borderColor', '#bcaaa4');
+      }
+      else {
+        $('.modal-form').css('borderColor', '#ffffff');
+      }
       if (edit_release == 'true') {
         $('#release-public').prev('#release-private').removeClass('selecting');
         $('#release-public').addClass('selecting');
@@ -298,11 +341,14 @@ $(document).on('turbolinks:load', function () {
         .done(function (data) {
           let html = buildHTML(data);
           let update_id = $('#item-' + data.id);
+          let now_fee = Number($('#total_fee').text().replace(/[^0-9]/g, ''));
 
           update_id.attr('id', 'item-' + data.id + '-remove');
           $('#item-' + data.id + '-remove').after(html);
+          let before_price = Number($('#item-' + data.id + '-remove').children().children().children('p[data-price=' + data.id + ']').text().replace(/[^0-9]/g, ''));
           $('#item-' + data.id + '-remove').remove();
           changeItemColor(data.id);
+          $('#total_fee').text(changeYen(now_fee + Number(data.price) - before_price));
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);
         })
 

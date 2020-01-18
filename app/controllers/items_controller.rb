@@ -5,11 +5,6 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.build_payment
     @items = Item.includes(:payment).where(user_id: current_user.id)
-    @total_service = @items.length
-    @total_fee = 0
-    @items.each do |item|
-      @total_fee = item.price
-    end
   end
 
   def create

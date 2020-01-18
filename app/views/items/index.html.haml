@@ -2,7 +2,7 @@
 .items-main
   %ul.main-contents#result
     - @items.each do |item|
-      %li{id: "item-#{item.id}"}
+      %li{class:"item", id: "item-#{item.id}"}
         .function-buttons
           = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}" do
             .tooltip{"aria-label": "編集", "data-microtip-position": "top", "role": "tooltip"}
@@ -170,5 +170,5 @@
           = link_to "公開する", "", id: 'release-public', class: 'release-button__public selecting'
 
     .modal-form__buttons
-      = form.submit "登録", class: 'modal-submit', id: 'item_button'
+      = form.submit "登録", class: 'modal-submit', id: 'item_button', onclick: "submit();"
       = link_to "取り消し", "", class: 'modal-cancel', id: 'modal-close'
