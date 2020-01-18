@@ -1,0 +1,31 @@
+= render "shared/header"
+.items-main{style: "display: flex; align-items: center;"}
+  .main-contents
+    .content
+      .content__header
+        .header-survice
+          %p{class: "header-survice__title", "data-title": "#{@share.id}", "aria-label": "サービス名", "data-microtip-position": "top", "role": "tooltip"}
+            = @share.title
+          %p{class: "header-survice__plan", "data-plan": "#{@share.id}", "aria-label": "プラン名", "data-microtip-position": "top", "role": "tooltip"}
+            = @share.plan
+        %p{class: "header-price", "data-price": "#{@share.id}", "aria-label": "価格", "data-microtip-position": "top", "role": "tooltip"}
+          ¥
+          = @share.price
+
+      .content__body{style: "display: flex;"}
+        %input{type: "hidden", "data-color": "#{@share.id}", value: @share.color}
+        .body-link
+          .body-link__label
+            登録したリンク
+          = link_to "登録したサービスサイトを確認する", @share.link, class: "body-link__button", "data-link": "#{@share.id}"
+        .body-period
+          .body-period__label
+            支払いタイミング
+          %p{"data-period_long": "#{@share.id}"}
+            = @share.payment.period_long
+            ヶ月ごと
+          %input{type: "hidden", "data-period_unit": "#{@share.id}", value: @share.payment.period_unit}
+        .body-description
+          .body-description__label
+            メモ
+          %p{"data-description": "#{@share.id}"}= @share.payment.description
