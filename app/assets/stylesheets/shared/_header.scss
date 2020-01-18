@@ -5,6 +5,9 @@
   background-color: $md-blue-300;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
 
   &__top{
     font-size: 1.75rem;
@@ -14,7 +17,6 @@
     padding: 3px 10px;
     margin-left: 20px;
     border-radius: 5px;
-    line-height: 34px;
 
     &:hover{
       opacity: 0.75;
@@ -24,19 +26,59 @@
   .header-info{
     height: 100%;
     display: flex;
+    align-items: center;
 
     a{
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: $md-white;
       text-decoration: none;
       display: block;
       padding: 5px 10px;
       border-radius: 5px;
       margin-right: 20px;
-      line-height: 30px;
 
       &:hover{
         opacity: 0.75;
+      }
+    }
+
+    &__total-service{
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      font-size: 1.25rem;
+      color: $md-white;
+
+      .total-service-display{
+        padding: 5px 10px;
+        border-radius: 8px;
+        margin-left: 10px;
+        background-color: $md-white;
+        font-size: 1.75rem;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 2px;
+        color: $md-blue-grey-900;
+      }
+    }
+
+    &__total-fee{
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      font-size: 1.25rem;
+      color: $md-white;
+
+      .total-fee-display{
+        padding: 5px 10px;
+        border-radius: 8px;
+        margin-left: 10px;
+        background-color: $md-white;
+        font-size: 1.75rem;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 2px;
+        color: $md-blue-grey-900;
       }
     }
   }

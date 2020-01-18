@@ -2,7 +2,7 @@
 .items-main
   %ul.main-contents#result
     - @items.each do |item|
-      %li{id: "item-#{item.id}"}
+      %li{class:"item", id: "item-#{item.id}"}
         .function-buttons
           = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}" do
             .tooltip{"aria-label": "編集", "data-microtip-position": "top", "role": "tooltip"}
@@ -83,17 +83,17 @@
   = form_for @item, url: user_items_path(current_user.id), html:{class: "modal-form", id: 'item_form'} do |form|
     .modal-line
       .modal-line__labels
-        = form.label :title, placeholder: "ここに入力"
+        = form.label :title
         .required
           必須
-      = form.text_field :title, class: "modal-line__text-field"
+      = form.text_field :title, class: "modal-line__text-field", placeholder: "例) Netflix"
 
     .modal-line
       .modal-line__labels
         = form.label :link
         .required
           必須
-      = form.text_field :link, class: "modal-line__text-field"
+      = form.text_field :link, class: "modal-line__text-field", placeholder: "例) https://www.netflix.com/jp/"
 
     .modal-line
       .modal-line__labels-color
@@ -118,7 +118,7 @@
         = form.label :plan
         .required
           必須
-      = form.text_field :plan, class: "modal-line__text-field"
+      = form.text_field :plan, class: "modal-line__text-field", placeholder: "例) ベーシックプラン"
 
     .modal-line
       .modal-line__labels
@@ -127,7 +127,7 @@
           必須
       %p.price_unit
         ¥
-      = form.text_field :price, class: "modal-line__integer"
+      = form.text_field :price, class: "modal-line__integer", placeholder: "例) 800"
 
     = form.fields_for :payment do |pform|
       .modal-line
@@ -135,7 +135,7 @@
           = pform.label :period_long
           .required
             必須
-        = pform.text_field  :period_long, class: "modal-line__integer-period"
+        = pform.text_field  :period_long, class: "modal-line__integer-period", placeholder: "例) 1"
         = pform.select :period_unit, [['---', 0], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]], {}, class: "modal-line__select"
 
       .modal-line
@@ -150,14 +150,14 @@
           = pform.label :pay_method
           .arbitrary
             任意
-        = pform.text_field  :pay_method, class: "modal-line__text-field"
+        = pform.text_field  :pay_method, class: "modal-line__text-field", placeholder: "例) クレジットカード"
 
       .modal-line
         .modal-line__labels
           = pform.label :description
           .arbitrary
             任意
-        = pform.text_area :description, class: "modal-line__text-area"
+        = pform.text_area :description, class: "modal-line__text-area", placeholder: "例) 自由に入力してね！"
 
       .modal-line
         .modal-line__labels
