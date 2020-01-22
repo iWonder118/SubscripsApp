@@ -61,22 +61,22 @@ $(document).on('turbolinks:load', function () {
     }
 
     function buildShare(item) {
-      let share = `<a title="Twitter" target="_blank" class="twitter" href="https://twitter.com/share?url=https://${location.host}/users/${item.uid}/items/${item.id}">
+      let share = `<a title="Twitter" target="_blank" class="twitter" href="https://twitter.com/share?url=https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
                     <div aria-label='Twitterでツイート' class='tooltip' data-microtip-position='top' role='tooltip'>
                       <i class='fab fa-twitter'></i>
                     </div>
                   </a>
-                  <a title="Facebook" target="_blank" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://${location.host}/users/${item.uid}/items/${item.id}">
+                  <a title="Facebook" target="_blank" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
                     <div aria-label='Facebookでシェア' class='tooltip' data-microtip-position='top' role='tooltip'>
                       <i class='fab fa-facebook'></i>
                     </div>
                   </a>
-                  <a title="LINE" target="_blank" class="line" href="http://line.me/R/msg/text/?https://${location.host}/users/${item.uid}/items/${item.id}">
+                  <a title="LINE" target="_blank" class="line" href="http://line.me/R/msg/text/?https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
                     <div aria-label='Lineでシェア' class='tooltip' data-microtip-position='top' role='tooltip'>
                       <i class='fab fa-line'></i>
                     </div>
                   </a>
-                  <a title="Slack" target="_blank" class="slack" href="http://slackbutton.herokuapp.com/post/new/?url=https://${location.host}/users/${item.uid}/items/${item.id}">
+                  <a title="Slack" target="_blank" class="slack" href="http://slackbutton.herokuapp.com/post/new/?url=https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
                     <div aria-label='Slackでシェア' class='tooltip' data-microtip-position='top' role='tooltip'>
                       <i class='fab fa-slack'></i>
                     </div>`
