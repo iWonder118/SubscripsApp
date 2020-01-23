@@ -4,6 +4,19 @@
     - @items.each do |item|
       %li{class:"item", id: "item-#{item.id}"}
         .function-buttons
+          - if item.release
+            = link_to "https://twitter.com/share?url=#{request.url}users/#{current_user.id}/items/#{item.id}&text=#{item.payment.description.to_s}%0aサービス名:#{item.title}%0aサービス名:#{item.plan}%0a%20%23SubscripS%20", title: 'Twitter', target: '_blank', class: 'twitter' do
+              .tooltip{"aria-label": "Twitterでツイート", "data-microtip-position": "top", "role": "tooltip"}
+                %i.fab.fa-twitter
+            = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.url}users/#{current_user.id}/items/#{item.id}&text=#{item.payment.description.to_s}%0aサービス名:#{item.title}%0aサービス名:#{item.plan}%0a%20%23SubscripS%20", title: 'Facebook', target: '_blank', class: 'facebook' do
+              .tooltip{"aria-label": "Facebookでシェア", "data-microtip-position": "top", "role": "tooltip"}
+                %i.fab.fa-facebook
+            = link_to "http://line.me/R/msg/text/?#{request.url}users/#{current_user.id}/items/#{item.id}&text=#{item.payment.description.to_s}%0aサービス名:#{item.title}%0aサービス名:#{item.plan}%0a%20%23SubscripS%20", title: 'LINE', target: '_blank', class: 'line' do
+              .tooltip{"aria-label": "Lineでシェア", "data-microtip-position": "top", "role": "tooltip"}
+                %i.fab.fa-line
+            = link_to "http://slackbutton.herokuapp.com/post/new/?url=#{request.url}users/#{current_user.id}/items/#{item.id}&text=#{item.payment.description.to_s}%0aサービス名:#{item.title}%0aサービス名:#{item.plan}%0a%20%23SubscripS%20", title: 'Slack', target: '_blank', class: 'slack' do
+              .tooltip{"aria-label": "Slackでシェア", "data-microtip-position": "top", "role": "tooltip"}
+                %i.fab.fa-slack
           = link_to user_item_path(current_user.id, item.id), class: "edit_item", "data-edit": "#{item.id}" do
             .tooltip{"aria-label": "編集", "data-microtip-position": "top", "role": "tooltip"}
               %i.fas.fa-edit
@@ -42,10 +55,14 @@
               %input{type: "hidden", "data-period_unit": "#{item.id}", value: item.payment.period_unit}
             .body-firstpayment
               .body-firstpayment__label
-                初回支払日
+                次回支払日 [初回支払日]
               %input{type: "hidden", "data-first_payment": "#{item.id}", value: item.payment.first_payment}
               %p
+                = item.payment.first_payment.next_month.strftime("%Y年%m月%d日")
+                [
                 = item.payment.first_payment.strftime("%Y年%m月%d日")
+                ]
+
             .body-paymethod
               .body-paymethod__label
                 支払い方法
@@ -64,7 +81,8 @@
             .body-description
               .body-description__label
                 メモ
-              %p{"data-description": "#{item.id}"}= item.payment.description
+              %input{type: "hidden", "data-description": "#{item.id}", value: item.payment.description.to_s}
+              %p= simple_format(item.payment.description)
 
           .show-off
             = link_to "", class: "show-off__button" do

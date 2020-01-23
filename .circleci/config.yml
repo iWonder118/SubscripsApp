@@ -9,14 +9,14 @@ jobs:
       # specify the version you desire here
       - image: circleci/ruby:2.5.1-node-browsers
         environment:
-          RAILS_ENV: test 
-          DB_USERNAME: root 
+          RAILS_ENV: test
+          DB_USERNAME: root
           DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-          
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -91,7 +91,7 @@ jobs:
           command: |
             docker build -t ${ECR_DOMAIN}/subscrips-image:$CIRCLE_SHA1 -t ${ECR_DOMAIN}/subscrips-image:latest --build-arg RAILS_MASTER_KEY=${RAILS_MASTER_KEY} --build-arg RAILS_ENV=production .
       - run:
-          name: Push docker image 
+          name: Push docker image
           command: |
             docker push ${ECR_DOMAIN}/subscrips-image:$CIRCLE_SHA1 
             docker push ${ECR_DOMAIN}/subscrips-image:latest
@@ -119,9 +119,10 @@ jobs:
             aws ecs register-task-definition --family rails-service --cli-input-json file://definition.json
             aws ecs update-service --cluster sample-ecs-cluster --service rails-service --task-definition rails-service
       - run:
-              name: migration
-              command: |
-                aws ecs run-task --cluster sample-ecs-cluster --task-definition rails-migrate
+          name: migration
+          command: |
+            aws ecs run-task --cluster sample-ecs-cluster --task-definition rails-migrate
+
 workflows:
   version: 2
   test:
@@ -133,9 +134,9 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy: 
+      - deploy:
           requires:
-            - build_image 
+            - build_image
           filters:
             branches:
               only: master

@@ -41,14 +41,13 @@ $(document).on('turbolinks:load', function () {
                           <p data-pay_method="${item.id}">${item.pay_method}</p>
                         </div>
                         <div class='body-release'>
-                          <div class='body-release__label'> 公開設定 </div> <input data-release="${item.id}" type='hidden' ${item.release}>
+                          <div class='body-release__label'> 公開設定 </div> <input data-release="${item.id}" type='hidden' value="${item.release}">
                           ${item.release ? "<div class='body-release__display-on'> 公開中 </div>" : "<div class='body-release__display-off'> 非公開 </div>"}
                         </div>
                         <div class='body-description'>
                           <div class='body-description__label'> メモ </div>
-                          <p data-description="${item.id}">
-                            <p>${item.description}</p>
-                          </p>
+                          <input data-description="${item.id}" type='hidden' value="${item.description}">
+                          <p>${item.description}</p>
                         </div>
                       </div>
                       <div class='show-off'>
@@ -59,6 +58,29 @@ $(document).on('turbolinks:load', function () {
                     </div>
                   </li>`
       return html;
+    }
+
+    function buildShare(item) {
+      let share = `<a title="Twitter" target="_blank" class="twitter" href="https://twitter.com/share?url=https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
+                    <div aria-label='Twitterでツイート' class='tooltip' data-microtip-position='top' role='tooltip'>
+                      <i class='fab fa-twitter'></i>
+                    </div>
+                  </a>
+                  <a title="Facebook" target="_blank" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
+                    <div aria-label='Facebookでシェア' class='tooltip' data-microtip-position='top' role='tooltip'>
+                      <i class='fab fa-facebook'></i>
+                    </div>
+                  </a>
+                  <a title="LINE" target="_blank" class="line" href="http://line.me/R/msg/text/?https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
+                    <div aria-label='Lineでシェア' class='tooltip' data-microtip-position='top' role='tooltip'>
+                      <i class='fab fa-line'></i>
+                    </div>
+                  </a>
+                  <a title="Slack" target="_blank" class="slack" href="http://slackbutton.herokuapp.com/post/new/?url=https://${location.host}/users/${item.uid}/items/${item.id}&text=${item.description}%0aサービス名:${item.title}%0aサービス名:${item.plan}%0a%20%23SubscripS%20">
+                    <div aria-label='Slackでシェア' class='tooltip' data-microtip-position='top' role='tooltip'>
+                      <i class='fab fa-slack'></i>
+                    </div>`
+      return share;
     }
 
     //非同期で追加されたアイテムにイメージカラーへ変更する処理
@@ -190,6 +212,10 @@ $(document).on('turbolinks:load', function () {
           let now_fee = Number($('#total_fee').text().replace(/[^0-9]/g, ''));
           let html = buildHTML(data);
           $('#result').append(html);
+          if (data.release == 'true') {
+            let share = buildShare(data);
+            $('#item-' + data.id).children('.function-buttons').prepend(share);
+          }
           changeItemColor(data.id);
           $('#total_fee').text(changeYen(now_fee + Number(data.price)));
           $('#total_service').text($('.item:visible').length);
@@ -263,7 +289,7 @@ $(document).on('turbolinks:load', function () {
       let edit_first_payment = $("input[data-first_payment=" + edit_id + "]").val();
       let edit_pay_method = $("p[data-pay_method=" + edit_id + "]").text();
       let edit_release = String($("input[data-release=" + edit_id + "]").val().match(/[A-Z]{4,5}/i));
-      let edit_description = $("p[data-description=" + edit_id + "]").text();
+      let edit_description = $("input[data-description=" + edit_id + "]").val();
 
       $("#item_title").val(edit_title);
       $("#item_link").val(edit_link);
@@ -347,6 +373,10 @@ $(document).on('turbolinks:load', function () {
           $('#item-' + data.id + '-remove').after(html);
           let before_price = Number($('#item-' + data.id + '-remove').children().children().children('p[data-price=' + data.id + ']').text().replace(/[^0-9]/g, ''));
           $('#item-' + data.id + '-remove').remove();
+          if (data.release == 'true') {
+            let share = buildShare(data);
+            $('#item-' + data.id).children('.function-buttons').prepend(share);
+          }
           changeItemColor(data.id);
           $('#total_fee').text(changeYen(now_fee + Number(data.price) - before_price));
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);

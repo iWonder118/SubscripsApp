@@ -1,10 +1,22 @@
 class ItemsController < ApplicationController
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_user!, except: [:show]
+
   before_action :set_item, only: [ :update, :destroy]
+  before_action :set_share, only: [ :show]
 
   def index
     @item = Item.new
     @item.build_payment
     @items = Item.includes(:payment).where(user_id: current_user.id)
+  end
+
+  def show
+    if @share.release 
+
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -47,5 +59,9 @@ private
 
   def set_item
     @item = Item.includes(:payment).find(params[:id])
+  end
+
+  def set_share
+    @share = Item.find(params[:id])
   end
 end
