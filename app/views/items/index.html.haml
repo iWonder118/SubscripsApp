@@ -55,10 +55,14 @@
               %input{type: "hidden", "data-period_unit": "#{item.id}", value: item.payment.period_unit}
             .body-firstpayment
               .body-firstpayment__label
-                初回支払日
+                次回支払日 [初回支払日]
               %input{type: "hidden", "data-first_payment": "#{item.id}", value: item.payment.first_payment}
               %p
+                = item.payment.first_payment.next_month.strftime("%Y年%m月%d日")
+                [
                 = item.payment.first_payment.strftime("%Y年%m月%d日")
+                ]
+
             .body-paymethod
               .body-paymethod__label
                 支払い方法
