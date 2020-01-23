@@ -23,7 +23,7 @@
         display: block;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        color: $md-blue-grey-900;
+        color:  $md-white;
         text-decoration: none;
         text-align: center;
         border-style: none;
@@ -36,7 +36,6 @@
 
       .facebook {
         background-color: #2e4a88;
-        color:  $md-white;
 
         &:hover {
           background-color: #354F84;
@@ -45,7 +44,6 @@
 
       .twitter {
         background-color: #008DDE;
-        color:  $md-white;
 
         &:hover {
           background-color: #1397D8;
@@ -54,7 +52,6 @@
 
       .line {
         background-color: #35de00;
-        color:  $md-white;
 
         &:hover {
           background-color: #35de00ed;
@@ -63,7 +60,6 @@
 
       .slack {
         background-color: #9401ff;
-        color:  $md-white;
 
         &:hover {
           background-color: #9401ffe8;
