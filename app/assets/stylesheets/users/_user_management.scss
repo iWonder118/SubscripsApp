@@ -64,22 +64,20 @@
         display: flex;
 
         .fa-user-circle{
+          @include border-radius-left;
           color: $md-blue-grey-900;
           padding: 5px 12px;
           background-color: $md-grey-300;
           font-size: 25px;
-          border-top-left-radius: 8px;
-          border-bottom-left-radius: 8px;
         }
 
         .form-name{
+          @include border-radius-right;
           height: 35px;
           width: 100%;
           padding: 0 10px;
-          display: block;
+          display: block; 
           border: 2px solid $md-grey-300;
-          border-top-right-radius: 8px;
-          border-bottom-right-radius: 8px;
           font-size: 1.25rem;
         }
       }
@@ -89,22 +87,20 @@
         display: flex;
 
         .fa-envelope{
+          @include border-radius-left;
           color: $md-blue-grey-900;
           padding: 5px 12px;
           background-color: $md-grey-300;
           font-size: 25px;
-          border-top-left-radius: 8px;
-          border-bottom-left-radius: 8px;
         }
 
         .form-email{
+          @include border-radius-right;
           height: 35px;
           width: 100%;
           padding: 0 10px;
           display: block;
           border: 2px solid $md-grey-300;
-          border-top-right-radius: 8px;
-          border-bottom-right-radius: 8px;
           font-size: 1.25rem;
         }
       }
@@ -114,22 +110,20 @@
         display: flex;
 
         .fa-key{
+          @include border-radius-left;
           color: $md-blue-grey-900;
           padding: 5px 12px;
           background-color: $md-grey-300;
           font-size: 25px;
-          border-top-left-radius: 8px;
-          border-bottom-left-radius: 8px;
         }
 
         .form-password{
+          @include border-radius-right;
           height: 35px;
           width: 100%;
           padding: 0 10px;
           display: block;
           border: 2px solid $md-grey-300;
-          border-top-right-radius: 8px;
-          border-bottom-right-radius: 8px;
           font-size: 1.25rem;
         }
       }
@@ -139,22 +133,20 @@
         display: flex;
 
         .fa-key{
+          @include border-radius-left;
           color: $md-blue-grey-900;
           padding: 5px 12px;
           background-color: $md-grey-300;
           font-size: 25px;
-          border-top-left-radius: 8px;
-          border-bottom-left-radius: 8px;
         }
 
         .form-confirmation{
+          @include border-radius-right;
           height: 35px;
           width: 100%;
           padding: 0 10px;
           display: block;
           border: 2px solid $md-grey-300;
-          border-top-right-radius: 8px;
-          border-bottom-right-radius: 8px;
           font-size: 1.25rem;
         }
       }
@@ -174,13 +166,12 @@
         }
 
         input{
+          @include border-radius-left;
           width: 100%;
           height: 100%;
           display:table-cell;
           text-decoration: none;
           border-style: none;
-          border-top-left-radius: 8px;
-          border-bottom-left-radius: 8px;
           font-size: 1.2rem;
           font-weight: bold;
           color: $md-grey-100;
@@ -192,9 +183,8 @@
         }
   
         a{
+          @include border-radius-right;
           width: 50%;
-          border-top-right-radius: 8px;
-          border-bottom-right-radius: 8px;
           line-height: 250%;
           text-align: center;
           display:table-cell;

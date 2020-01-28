@@ -8,7 +8,7 @@
         利用サービス数 :
         %p{class: "total-service-display", id: "total_service"}0
       .header-info__total-fee
-        合計金額 :
+        毎月の合計金額 :
         %p{class: "total-fee-display", id: "total_fee"}0
       = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'header-info__logout'
     - else

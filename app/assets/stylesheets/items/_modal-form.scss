@@ -23,24 +23,21 @@
     position: relative;
 
     .modal-line{
-      display: flex;
-      justify-content: space-between;
+      @include flex-between;
       position: relative;
 
       &__labels{
+        @include flex-between;
         width: 25%;
         margin-bottom: 5px;
-        display: flex;      
-        justify-content: space-between;
         font-size: 1.25rem;
 
         &-color{
+          @include flex-height-center;
           width: 25%;
           margin-bottom: 5px;
-          display: flex;
           justify-content: space-between;
           font-size: 1.25rem;
-          align-items: center;
         }
       }
 
@@ -143,92 +140,52 @@
         justify-content: space-around;
 
         .item-skin-white{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-white;
         }
 
         .item-skin-grey{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-grey-400;
         }
 
         .item-skin-red{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-red-400;
         }
 
         .item-skin-orange{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-orange-400;
         }
 
         .item-skin-yellow{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-yellow-400;
         }
 
         .item-skin-green{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-green-400;
         }
 
         .item-skin-blue{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-blue-400;
         }
 
         .item-skin-purple{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-purple-400;
         }
 
         .item-skin-pink{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-pink-400;
         }
 
         .item-skin-brown{
-          height: 35px;
-          width: 35px;
-          border: 1px $md-grey-400 solid;
-          border-radius: 5px;
-          display: block;
+          @include skin-button;
           background-color: $md-brown-400;
         }
         
@@ -244,15 +201,14 @@
         display: flex;
         
         a{
+          @include link-button;
           width: 50%;
           line-height: 250%;
           text-align: center;
           background-color: $md-grey-400;
-          display:  block;
           font-size: 1.2rem;
           font-weight: bold;
           color: $md-grey-100;
-          text-decoration: none;
           transition: .2s;
 
           &:hover{
@@ -261,13 +217,11 @@
         }
 
         &__private{
-          border-top-left-radius: 8px;
-          border-bottom-left-radius: 8px;
+          @include border-radius-left;
         }
 
         &__public{
-          border-top-right-radius: 8px;
-          border-bottom-right-radius: 8px;
+          @include border-radius-right;
         }
 
         .selecting{
@@ -282,16 +236,15 @@
       justify-content: flex-end;
 
       .modal-submit{
+        @include link-button;
         width: 20%;
         border-radius: 8px;
         background-color: $md-blue-400;
         line-height: 250%;
         text-align: center;
-        display:  block;
         font-size: 1.2rem;
         font-weight: bold;
         color: $md-grey-100;
-        text-decoration: none;
         transition: .2s;
 
         &:hover{
@@ -300,17 +253,16 @@
       }
 
       .modal-cancel{
+        @include link-button;
         width: 20%;
         border-radius: 8px;
         background-color: $md-grey-400;
         margin: 0 3%;
         line-height: 250%;
         text-align: center;
-        display:  block;
         font-size: 1.2rem;
         font-weight: bold;
         color: $md-grey-100;
-        text-decoration: none;
         transition: .4s;
 
         &:hover{
@@ -322,21 +274,11 @@
 }
 
 .required{
-  height: 30px;
-  padding: 2px 5px;
-  border-radius: 8px;
-  margin-left: 5px;
-  font-size: 1rem;
-  color: $md-white;
+  @include form-label;
   background-color: $md-deep-orange-a400;
 }
 
 .arbitrary{
-  height: 30px;
-  padding: 2px 5px;
-  border-radius: 8px;
-  margin-left: 5px;
-  font-size: 1rem;
-  color: $md-white;
+  @include form-label;
   background-color: $md-grey-400;
 }

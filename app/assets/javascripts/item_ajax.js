@@ -189,7 +189,12 @@ $(document).on('turbolinks:load', function () {
       e.preventDefault();
       $('#modal-window').css('display', 'none');
       $('#new_item').css('display', 'block');
-      $('#show_all_off').css('display', 'block');
+      if ($('.content__body:visible').length > 0) {
+        $('#show_all_off').css('display', 'block');
+      }
+      else {
+        $('#show_all_off').css('display', 'none');
+      }
     });
 
     // 作成時の非同期処理
