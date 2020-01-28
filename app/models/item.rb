@@ -3,9 +3,9 @@ class Item < ApplicationRecord
 
   belongs_to :user
   
-  include RankedModel 
+  include RankedModel
   ranks :row_order , with_same: :user_id 
-  
+
   accepts_nested_attributes_for :payment
 
   validates :payment , presence: true

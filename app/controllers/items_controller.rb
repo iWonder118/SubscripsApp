@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   def index
     @item = Item.new
     @item.build_payment
-    @items = Item.includes(:payment).where(user_id: current_user.id).rank(:row_order)
+    @items = Item.rank(:row_order).includes(:payment).where(user_id: current_user.id)
   end
 
   def show
