@@ -1,19 +1,17 @@
 .header{
+  @include flex-height-center;
   height: 60px;
   width: 100vw;
   padding: 10px 10px;
   background-color: $md-blue-300;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   position: fixed;
   z-index: 1;
 
   &__top{
+    @include link-button;
     font-size: 1.75rem;
     color: $md-white;
-    display: block;
-    text-decoration: none;
     padding: 3px 10px;
     margin-left: 20px;
     border-radius: 5px;
@@ -24,15 +22,13 @@
   }
 
   .header-info{
+    @include flex-height-center;
     height: 100%;
-    display: flex;
-    align-items: center;
 
     a{
+      @include link-button;
       font-size: 1.25rem;
       color: $md-white;
-      text-decoration: none;
-      display: block;
       padding: 5px 10px;
       border-radius: 5px;
       margin-right: 20px;
@@ -43,9 +39,8 @@
     }
 
     &__total-service{
+      @include flex-height-center;
       margin-right: 20px;
-      display: flex;
-      align-items: center;
       font-size: 1.25rem;
       color: $md-white;
 
@@ -63,9 +58,8 @@
     }
 
     &__total-fee{
+      @include flex-height-center;
       margin-right: 20px;
-      display: flex;
-      align-items: center;
       font-size: 1.25rem;
       color: $md-white;
 

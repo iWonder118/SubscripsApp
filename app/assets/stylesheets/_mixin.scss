@@ -1,0 +1,41 @@
+@mixin link-button　{
+  text-decoration: none;
+  display: block;
+}
+
+@mixin flex-height-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin skin-button {
+  height: 35px;
+  width: 35px;
+  border: 1px $md-grey-400 solid;
+  border-radius: 5px;
+  display: block;
+}
+
+@mixin form-label {
+  height: 30px;
+  padding: 2px 5px;
+  border-radius: 8px;
+  margin-left: 5px;
+  font-size: 1rem;
+  color: $md-white;
+}
+
+@mixin border-radius-left {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+@mixin border-radius-right {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
