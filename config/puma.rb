@@ -4,7 +4,7 @@
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
 #
-if ENV.fetch("RAILS_ENV") == "production"
+if ENV["RAILS_ENV"] == "production"
   workers 1 
 end
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
