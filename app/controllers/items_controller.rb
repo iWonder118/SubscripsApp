@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [ :update, :destroy]
   before_action :set_share, only: [ :show]
 
+  after_action :reset_row_order, only: [:sort, :create, :update]
+
   def index
     @item = Item.new
     @item.build_payment
@@ -50,6 +52,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def sort
+    if @item = Item.update_attribute(params.requier(:item).permit(:row_order_position))
+      render body: nil 
+    else
+      render body: nil 
+    end
+  end
+
 private
 
   def item_params
@@ -63,5 +73,11 @@ private
 
   def set_share
     @share = Item.find(params[:id])
+  end
+
+  def reset_row_order
+    Item.rank(:row_order).each_with_index do |item, i|
+    item.update_attribute(:row_order, i + 1)
+    end
   end
 end
