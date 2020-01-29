@@ -6,6 +6,7 @@ FactoryBot.define do
     plan    {"student"}
     price   {250}
     release  {1}
+    row_order_position  {1}
     association      :user, factory: :user
 
     after(:build) do |item|
@@ -20,6 +21,7 @@ FactoryBot.define do
     plan    {"student"}
     price   {250}
     release  {1}
+    row_order_position  {1}
     association      :user, factory: :user
   end
 end
