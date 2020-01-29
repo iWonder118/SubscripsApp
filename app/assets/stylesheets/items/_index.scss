@@ -16,6 +16,39 @@
       display: flex;
       justify-content: flex-end;
 
+      .sort_item{
+        width: 7%;
+        height: 40px;
+        margin-right: auto;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        color:  $md-white;
+        background-color: $md-grey-400;
+        text-align: center;
+        position: relative;
+
+        &:before{
+          content: '';
+          position: absolute;
+          height: 10px;
+          width: 10px;
+          bottom: -10px;
+          left: 0;
+          z-index: -1;
+          background-color: $md-grey-400;
+          border-left-color: transparent;
+        }
+
+        &:hover{
+          color: $md-grey-700;
+        }
+
+        i{
+          margin-top: 10px;
+          font-size: 1.5rem;
+        }
+      }
+
       a{
         @include link-button;
         width: 7%;
@@ -136,6 +169,7 @@
         border-style: none;
 
         &__button{
+          height: 100%;
           display: block;
           
           &:hover{
