@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = Item.new(item_params.merge(row_order_position: :last))
     if @item.save
       respond_to do |format|
         format.json
