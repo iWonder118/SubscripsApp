@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :item, class: Item do
-    title   {"Amazon Prime"}
-    link    {"https://www.amazon.co.jp/gp/prime/pipeline/signup?showLandingPage=1&renderingType=mobile&primeCampaignId=primeMobileSignupWhite"}
-    color   {"orange"}
-    plan    {"student"}
-    price   {250}
-    release  {1}
-    row_order_position  {1}
+    title     {"Amazon Prime"}
+    link      {"https://www.amazon.co.jp/gp/prime/pipeline/signup?showLandingPage=1&renderingType=mobile&primeCampaignId=primeMobileSignupWhite"}
+    color     {"orange"}
+    plan      {"student"}
+    price     {250}
+    release   {1}
+    row_order {1}
     association      :user, factory: :user
 
     after(:build) do |item|
@@ -15,13 +15,13 @@ FactoryBot.define do
   end
 
   factory :item_no_payment, class: Item do
-    title   {"Amazon Prime"}
-    link    {"https://www.amazon.co.jp/gp/prime/pipeline/signup?showLandingPage=1&renderingType=mobile&primeCampaignId=primeMobileSignupWhite"}
-    color   {"orange"}
-    plan    {"student"}
-    price   {250}
-    release  {1}
-    row_order_position  {1}
+    title     {"Amazon Prime"}
+    link      {"https://www.amazon.co.jp/gp/prime/pipeline/signup?showLandingPage=1&renderingType=mobile&primeCampaignId=primeMobileSignupWhite"}
+    color     {"orange"}
+    plan      {"student"}
+    price     {250}
+    release   {1}
+    row_order {1}
     association      :user, factory: :user
   end
 end

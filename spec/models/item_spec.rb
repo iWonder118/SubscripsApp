@@ -95,10 +95,10 @@ describe Item, type: :model do
       expect(item.errors[:price]).to include("は1000000以下の値にしてください")
     end
 
-    it "row_order_positionが整数以外の場合、登録できないこと" do
-      item = build(:item, row_order_position: "ああああ")
+    it "row_orderが整数以外の場合、登録できないこと" do
+      item = build(:item, row_order: "ああああ")
       item.valid?
-      expect(item.errors[:row_order_position]).to include("は数値で入力してください")
+      expect(item.errors[:row_order]).to include("は数値で入力してください")
     end
 
     it "period_longが未入力の場合、登録できないこと" do
