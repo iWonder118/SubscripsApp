@@ -24,15 +24,18 @@ $(document).on('turbolinks:load', function () {
       $('.show-off').css('display', 'none');
       $('.show-on').css('display', 'block');
       $('#show_all_off').css('display', 'none');
+      $('.sort_item').css('display', 'block');
     });
 
     //アイテムの詳細が開いてるときのみ全詳細 非 表示ボタンを出現させる処理
     $(document).on('change', '.content__body', function () {
       if ($('.content__body:visible').length > 0) {
         $('#show_all_off').css('display', 'block');
+        $('.sort_item').css('display', 'none');
       }
       else {
         $('#show_all_off').css('display', 'none');
+        $('.sort_item').css('display', 'block');
       }
     });
   });

@@ -2,10 +2,10 @@ class ItemsController < ApplicationController
   # ログイン済ユーザーのみにアクセスを許可する
   before_action :authenticate_user!, except: [:show]
 
-  before_action :set_item, only: [ :update, :destroy]
-  before_action :set_share, only: [ :show]
+  before_action :set_item, only: [:update, :destroy, :sort]
+  before_action :set_share, only: [:show]
 
-  after_action :reset_row_order, only: [:sort, :create, :update]
+  after_action :reset_row_order, only: [:sort, :create]
 
   def index
     @item = Item.new
@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
   end
 
   def sort
-    if @item = Item.update_attribute(params.requier(:item).permit(:row_order_position))
+    if @item.update(sort_params)
       render body: nil 
     else
       render body: nil 
@@ -67,6 +67,10 @@ private
                                 payment_attributes:[:id, :period_long, :period_unit, :first_payment, :pay_method, :description]).merge(user_id: current_user.id)
   end
 
+  def sort_params
+    params.require(:item).permit(:row_order_position)
+  end
+
   def set_item
     @item = Item.includes(:payment).find(params[:id])
   end
@@ -77,7 +81,7 @@ private
 
   def reset_row_order
     Item.rank(:row_order).each_with_index do |item, i|
-    item.update_attribute(:row_order, i + 1)
+      item.update_attribute(:row_order, i + 1)
     end
   end
 end
