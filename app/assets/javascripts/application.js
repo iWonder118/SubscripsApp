@@ -12,6 +12,8 @@
 //
 //= require activestorage
 //= require jquery 
-//= require jquery_ujs 
+//= require jquery_ujs
+//= require jquery-ui/widgets/sortable
+//= require jquery-ui/effects/effect-highlight 
 //= require turbolinks
 //= require_tree .

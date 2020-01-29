@@ -71,6 +71,12 @@ describe Item, type: :model do
       expect(item.errors[:plan]).to include("は40文字以内で入力してください")
     end
 
+    it "priceが整数以外の場合、登録できないこと" do
+      item = build(:item, price: "ああああ")
+      item.valid?
+      expect(item.errors[:price]).to include("は数値で入力してください")
+    end
+
     it "priceが入力されていない場合、登録できないこと" do
       item = build(:item, price: nil)
       item.valid?
@@ -87,6 +93,12 @@ describe Item, type: :model do
       item = build(:item, price: 10000001)
       item.valid?
       expect(item.errors[:price]).to include("は1000000以下の値にしてください")
+    end
+
+    it "row_order_positionが整数以外の場合、登録できないこと" do
+      item = build(:item, row_order_position: "ああああ")
+      item.valid?
+      expect(item.errors[:row_order_position]).to include("は数値で入力してください")
     end
 
     it "period_longが未入力の場合、登録できないこと" do

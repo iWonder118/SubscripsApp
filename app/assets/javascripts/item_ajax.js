@@ -6,6 +6,9 @@ $(document).on('turbolinks:load', function () {
                   </li>
                   <li class="item" id="item-${item.id}">
                     <div class='function-buttons'>
+                      <span class="sort_item"  href="/users/${item.uid}/items/${item.id}/sort">
+                        <div aria-label='並び替える' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-sort'></i> </div>
+                      </span>
                       <a class="edit_item" data-edit="${item.id}" href="/users/${item.uid}/items/${item.id}">
                         <div aria-label='編集' class='tooltip' data-microtip-position='top' role='tooltip'> <i class='fas fa-edit'></i> </div>
                       </a>
@@ -191,9 +194,11 @@ $(document).on('turbolinks:load', function () {
       $('#new_item').css('display', 'block');
       if ($('.content__body:visible').length > 0) {
         $('#show_all_off').css('display', 'block');
+        $('.sort_item').css('display', 'none');
       }
       else {
         $('#show_all_off').css('display', 'none');
+        $('.sort_item').css('display', 'block');
       }
     });
 
@@ -219,7 +224,7 @@ $(document).on('turbolinks:load', function () {
           $('#result').append(html);
           if (data.release == 'true') {
             let share = buildShare(data);
-            $('#item-' + data.id).children('.function-buttons').prepend(share);
+            $('#item-' + data.id).find('.edit_item').before(share);
           }
           changeItemColor(data.id);
           $('#total_fee').text(changeYen(now_fee + Number(data.price)));
@@ -234,7 +239,14 @@ $(document).on('turbolinks:load', function () {
         .always(function () {
           $('#modal-window').css('display', 'none');
           $('#new_item').css('display', 'block');
-          $('#show_all_off').css('display', 'block');
+          if ($('.content__body:visible').length > 0) {
+            $('#show_all_off').css('display', 'block');
+            $('.sort_item').css('display', 'none');
+          }
+          else {
+            $('#show_all_off').css('display', 'none');
+            $('.sort_item').css('display', 'block');
+          }
           $('#item_button').prop("disabled", false);
           $('#item_form')[0].reset();
         })
@@ -380,7 +392,7 @@ $(document).on('turbolinks:load', function () {
           $('#item-' + data.id + '-remove').remove();
           if (data.release == 'true') {
             let share = buildShare(data);
-            $('#item-' + data.id).children('.function-buttons').prepend(share);
+            $('#item-' + data.id).find('.edit_item').before(share);
           }
           changeItemColor(data.id);
           $('#total_fee').text(changeYen(now_fee + Number(data.price) - before_price));
@@ -394,7 +406,14 @@ $(document).on('turbolinks:load', function () {
         .always(function () {
           $('#modal-window').css('display', 'none');
           $('#new_item').css('display', 'block');
-          $('#show_all_off').css('display', 'block');
+          if ($('.content__body:visible').length > 0) {
+            $('#show_all_off').css('display', 'block');
+            $('.sort_item').css('display', 'none');
+          }
+          else {
+            $('#show_all_off').css('display', 'none');
+            $('.sort_item').css('display', 'block');
+          }
           $('#item_button').prop("disabled", false);
           $('#item_form_edit')[0].reset();
         })

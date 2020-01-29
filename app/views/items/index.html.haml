@@ -4,6 +4,9 @@
     - @items.each do |item|
       %li{class:"item", id: "item-#{item.id}"}
         .function-buttons
+          %span{class: "sort_item", href: sort_user_item_path(current_user.id, item.id)}
+            .tooltip{"aria-label": "並べ替える", "data-microtip-position": "top", "role": "tooltip"}
+              %i.fas.fa-sort
           - if item.release
             = link_to "https://twitter.com/share?url=#{request.url}users/#{current_user.id}/items/#{item.id}&text=#{item.payment.description.to_s}%0aサービス名:#{item.title}%0aサービス名:#{item.plan}%0a%20%23SubscripS%20", title: 'Twitter', target: '_blank', class: 'twitter' do
               .tooltip{"aria-label": "Twitterでツイート", "data-microtip-position": "top", "role": "tooltip"}
