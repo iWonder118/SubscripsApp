@@ -66,6 +66,8 @@
     
   [こちら](https://subscrips.com)よりログインして、確認することができます。  
   
+##  実装予定
+[こちら](https://github.com/iWonder118/SubscripsApp/issues/21)のissueにまとめてあります。
 ## DB設計
 - ER図  
   ![subscrips DB](https://user-images.githubusercontent.com/52240372/72961725-6d677500-3df5-11ea-9afe-a3de8c450a56.png)
