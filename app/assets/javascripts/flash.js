@@ -1,8 +1,12 @@
 $(document).on('turbolinks:load', function () {
   $(function () {
     $(document).on('change', '.flash-box', function () {
-      setTimeout("$('.notice').fadeOut('slow')", 3000);
+      $('.notice').fadeOut(3000).queue(function () {
+        this.remove();
+      });
     });
-    setTimeout("$('.alert').fadeOut('slow')", 3000);
+    $('.alert').fadeOut(3000).queue(function () {
+      this.remove();
+    });
   });
 });
