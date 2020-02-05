@@ -36,8 +36,8 @@ $(document).on('turbolinks:load', function () {
                           <div class='body-period__label'> 支払いタイミング </div>
                           <p data-period_long="${item.id}">${item.period_long}ヶ月ごと </p> <input data-period_unit="${item.id}" type='hidden' value="${item.period_unit}"> </div>
                         <div class='body-firstpayment'>
-                          <div class='body-firstpayment__label'> 初回支払日 </div> <input data-first_payment="${item.id}" type='hidden' value=${item.first_payment}>
-                          <p>${item.first_payment}</p>
+                          <div class='body-firstpayment__label'>次回支払日 [初回支払日] </div> <input data-first_payment="${item.id}" type='hidden' value=${item.first_payment}>
+                          <p>${item.next_payment.replace(/(\d+)-(\d+)-(\d+)/g, "$1年$2月$3日")}[${item.first_payment.replace(/(\d+)-(\d+)-(\d+)/g, "$1年$2月$3日")}]</p>
                         </div>
                         <div class='body-paymethod'>
                           <div class='body-paymethod__label'> 支払い方法 </div>
