@@ -24,20 +24,6 @@
    3.非同期でのドラッグアンドドロップでのソート  
      →jQuery-uiライブラリとranked-modelというGemでドラッグアンドドロップでソートができるようにしました。
  
- ## 実装機能
- - サービスの登録機能
- - サービスの削除機能
- - サービスの編集機能
- - サービスの共有機能
- - サービスの詳細機能
- - サービスのソート機能
- - 毎月の支払金額算出機能
- - サービスの登録数機能
- - ユーザー新規登録機能
- - ログイン機能
- - ログアウト機能
- - テストユーザー
- 
 ## 使用技術
 - システム環境(動作確認環境)
   - インフラ図  
@@ -89,12 +75,32 @@
   - Haml  
 
 - 本番環境
+  - トップページ
+    ![top_page](https://user-images.githubusercontent.com/52240372/73846927-af1e0400-4868-11ea-8006-037f2f8945a9.png)
   - テストアカウント  
     mail: `test-boy@gmail.com`  
     passwrod: `password123`  
     
   [こちら](https://subscrips.com)よりログインして、確認することができます。  
-  
+
+ ## 実装機能
+ - サービスの登録機能
+   [![Image from Gyazo](https://i.gyazo.com/a043b4a8518742d60c12b3079676b47d.gif)](https://gyazo.com/a043b4a8518742d60c12b3079676b47d)
+ - サービスの削除機能
+   [![Image from Gyazo](https://i.gyazo.com/a68af96f3df8b265725dc50b3a819344.gif)](https://gyazo.com/a68af96f3df8b265725dc50b3a819344)
+ - サービスの編集機能
+   [![Image from Gyazo](https://i.gyazo.com/a19d4ad4b259e5d10a3ed7e841fc24fa.gif)](https://gyazo.com/a19d4ad4b259e5d10a3ed7e841fc24fa)
+ - サービスのソート機能
+   [![Image from Gyazo](https://i.gyazo.com/f46508033b5f5a9a165e923bdca41d98.gif)](https://gyazo.com/f46508033b5f5a9a165e923bdca41d98)
+ - サービスの共有機能
+ - サービスの詳細機能
+ - 毎月の支払金額算出機能
+ - サービスの登録数機能
+ - ユーザー新規登録機能
+ - ログイン機能
+ - ログアウト機能
+ - テストユーザー
+ 
 ##  実装予定
 [こちら](https://github.com/iWonder118/SubscripsApp/issues/21)のissueにまとめてあります。
 ## DB設計
