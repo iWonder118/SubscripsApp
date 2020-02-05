@@ -234,6 +234,8 @@ $(document).on('turbolinks:load', function () {
             $('#item-' + data.id).find('.edit_item').before(share);
           }
           changeItemColor(data.id);
+          let flash = buildFlash(data.flash);
+          $('.flash-box').append(flash).change();
           $('#total_fee').text(changeYen(now_fee + Number(data.price)));
           $('#total_service').text($('.item:visible').length);
           $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
@@ -282,6 +284,8 @@ $(document).on('turbolinks:load', function () {
         .done(function (data) {
           let now_fee = Number($('#total_fee').text().replace(/[^0-9]/g, ''));
           $("#item-" + data.delete_id).remove();
+          let flash = buildFlash(data.flash);
+          $('.flash-box').append(flash).change();
           $('#total_fee').text(changeYen(now_fee - Number(data.price)));
           $('#total_service').text($('.item:visible').length);
         })
@@ -403,7 +407,7 @@ $(document).on('turbolinks:load', function () {
           }
           changeItemColor(data.id);
           let flash = buildFlash(data.flash);
-          $('.flash-box').append(flash).change();;
+          $('.flash-box').append(flash).change();
           $('#total_fee').text(changeYen(now_fee + Number(data.price) - before_price));
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);
         })

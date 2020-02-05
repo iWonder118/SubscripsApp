@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
     if @share.release 
 
     else
-      redirect_to root_path
+      redirect_to root_path, alert: '読み込みに失敗しました'
     end
   end
 
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
         format.json
       end
     else
-      redirect_to root_path
+      redirect_to root_path, alert: '作成に失敗しました'
     end
   end
 
@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
         format.json
       end
     else
-      redirect_to root_path
+      redirect_to root_path, alert: '更新に失敗しました'
     end
   end
 
@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
         format.json
       end
     else
-      redirect_to root_path
+      redirect_to root_path, alert: '削除に失敗しました'
     end
   end
 
