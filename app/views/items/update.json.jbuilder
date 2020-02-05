@@ -11,3 +11,4 @@ json.period_unit   @item.payment.period_unit
 json.first_payment @item.payment.first_payment
 json.pay_method    @item.payment.pay_method
 json.description   @item.payment.description
+json.flash         "更新が完了しました"

@@ -1,5 +1,6 @@
 = render "shared/header"
 .items-main
+  = render "shared/notification"
   %ul.main-contents#result
     - @items.each do |item|
       %li{class:"item", id: "item-#{item.id}"}

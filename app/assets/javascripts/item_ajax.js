@@ -86,6 +86,13 @@ $(document).on('turbolinks:load', function () {
       return share;
     }
 
+    function buildFlash(message) {
+      let flash = `<div class="notice">
+                    ${message}
+                  </div>`
+      return flash;
+    }
+
     //非同期で追加されたアイテムにイメージカラーへ変更する処理
     function changeItemColor(id) {
       let change_item_color = $('input[data-color=' + id + ']').val();
@@ -395,6 +402,8 @@ $(document).on('turbolinks:load', function () {
             $('#item-' + data.id).find('.edit_item').before(share);
           }
           changeItemColor(data.id);
+          let flash = buildFlash(data.flash);
+          $('.flash-box').append(flash).change();;
           $('#total_fee').text(changeYen(now_fee + Number(data.price) - before_price));
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);
         })

@@ -1,0 +1,15 @@
+.flash-box{
+  width: 100%;
+  color: $md-white;
+  font-size: 1.25rem;
+
+  .notice{
+    background-color: $md-green-300;
+    text-align: center;
+  }
+
+  .alert{
+    background-color: $md-deep-orange-300;
+    text-align: center;
+  }
+}
