@@ -1,5 +1,6 @@
 = render "shared/header"
 .items-main
+  = render "shared/notification"
   %ul.main-contents#result
     - @items.each do |item|
       %li{class:"item", id: "item-#{item.id}"}
@@ -54,14 +55,24 @@
                 支払いタイミング
               %p{"data-period_long": "#{item.id}"}
                 = item.payment.period_long
-                ヶ月ごと
+                - if item.payment.period_unit == 1
+                  ヶ月ごと
+                - elsif item.payment.period_unit == 2
+                  週間ごと
+                - else
+                  日ごと
               %input{type: "hidden", "data-period_unit": "#{item.id}", value: item.payment.period_unit}
             .body-firstpayment
               .body-firstpayment__label
                 次回支払日 [初回支払日]
               %input{type: "hidden", "data-first_payment": "#{item.id}", value: item.payment.first_payment}
               %p
-                = item.payment.first_payment.next_month.strftime("%Y年%m月%d日")
+                - if item.payment.period_unit == 1
+                  = item.payment.first_payment.since(item.payment.period_long.month).strftime("%Y年%m月%d日")
+                - elsif item.payment.period_unit == 2
+                  = item.payment.first_payment.since(item.payment.period_long.week).strftime("%Y年%m月%d日")
+                - else
+                  = item.payment.first_payment.since(item.payment.period_long.day).strftime("%Y年%m月%d日")
                 [
                 = item.payment.first_payment.strftime("%Y年%m月%d日")
                 ]

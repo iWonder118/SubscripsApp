@@ -13,4 +13,6 @@
       .form-btns
         %input.form-btns__login{ type: "submit", name: "commit", value: "ログイン", "data-disable-with": "ログイン"}
         = link_to "サインアップ", new_user_registration_path,class: "form-btns__signup"
+      %a{href:"",id: "test-login", class: "test-login"}
+        テストアカウントでログイン
   = render "devise/shared/copyright" 

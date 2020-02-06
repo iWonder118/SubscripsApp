@@ -34,10 +34,10 @@ $(document).on('turbolinks:load', function () {
                           <div class='body-link__label'> 登録したリンク </div> <a class="body-link__button" data-link="${item.id}" href="${item.link}">登録したサービスサイトを確認する</a> </div>
                         <div class='body-period'>
                           <div class='body-period__label'> 支払いタイミング </div>
-                          <p data-period_long="${item.id}">${item.period_long}ヶ月ごと </p> <input data-period_unit="${item.id}" type='hidden' value="${item.period_unit}"> </div>
+                          <p data-period_long="${item.id}">${item.period_long}${(item.period_unit == 1) ? "ヶ月ごと" : ""}${(item.period_unit == 2) ? "週間ごと" : ""}${(item.period_unit == 3) ? "日ごと" : ""} </p> <input data-period_unit="${item.id}" type='hidden' value="${item.period_unit}"> </div>
                         <div class='body-firstpayment'>
-                          <div class='body-firstpayment__label'> 初回支払日 </div> <input data-first_payment="${item.id}" type='hidden' value=${item.first_payment}>
-                          <p>${item.first_payment}</p>
+                          <div class='body-firstpayment__label'>次回支払日 [初回支払日] </div> <input data-first_payment="${item.id}" type='hidden' value=${item.first_payment}>
+                          <p>${item.next_payment.replace(/(\d+)-(\d+)-(\d+)/g, "$1年$2月$3日")}[${item.first_payment.replace(/(\d+)-(\d+)-(\d+)/g, "$1年$2月$3日")}]</p>
                         </div>
                         <div class='body-paymethod'>
                           <div class='body-paymethod__label'> 支払い方法 </div>
@@ -84,6 +84,13 @@ $(document).on('turbolinks:load', function () {
                       <i class='fab fa-slack'></i>
                     </div>`
       return share;
+    }
+
+    function buildFlash(message) {
+      let flash = `<div class="notice">
+                    ${message}
+                  </div>`
+      return flash;
     }
 
     //非同期で追加されたアイテムにイメージカラーへ変更する処理
@@ -227,6 +234,8 @@ $(document).on('turbolinks:load', function () {
             $('#item-' + data.id).find('.edit_item').before(share);
           }
           changeItemColor(data.id);
+          let flash = buildFlash(data.flash);
+          $('.flash-box').append(flash).change();
           $('#total_fee').text(changeYen(now_fee + Number(data.price)));
           $('#total_service').text($('.item:visible').length);
           $('#result').animate({ scrollTop: $("#result")[0].scrollHeight }, 1500);
@@ -275,6 +284,8 @@ $(document).on('turbolinks:load', function () {
         .done(function (data) {
           let now_fee = Number($('#total_fee').text().replace(/[^0-9]/g, ''));
           $("#item-" + data.delete_id).remove();
+          let flash = buildFlash(data.flash);
+          $('.flash-box').append(flash).change();
           $('#total_fee').text(changeYen(now_fee - Number(data.price)));
           $('#total_service').text($('.item:visible').length);
         })
@@ -395,6 +406,8 @@ $(document).on('turbolinks:load', function () {
             $('#item-' + data.id).find('.edit_item').before(share);
           }
           changeItemColor(data.id);
+          let flash = buildFlash(data.flash);
+          $('.flash-box').append(flash).change();
           $('#total_fee').text(changeYen(now_fee + Number(data.price) - before_price));
           $('#result').animate({ scrollTop: update_id.scrollHeight }, 1500);
         })
