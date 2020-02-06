@@ -34,7 +34,7 @@ $(document).on('turbolinks:load', function () {
                           <div class='body-link__label'> 登録したリンク </div> <a class="body-link__button" data-link="${item.id}" href="${item.link}">登録したサービスサイトを確認する</a> </div>
                         <div class='body-period'>
                           <div class='body-period__label'> 支払いタイミング </div>
-                          <p data-period_long="${item.id}">${item.period_long}ヶ月ごと </p> <input data-period_unit="${item.id}" type='hidden' value="${item.period_unit}"> </div>
+                          <p data-period_long="${item.id}">${item.period_long}${(item.period_unit == 1) ? "ヶ月ごと" : ""}${(item.period_unit == 2) ? "週間ごと" : ""}${(item.period_unit == 3) ? "日ごと" : ""} </p> <input data-period_unit="${item.id}" type='hidden' value="${item.period_unit}"> </div>
                         <div class='body-firstpayment'>
                           <div class='body-firstpayment__label'>次回支払日 [初回支払日] </div> <input data-first_payment="${item.id}" type='hidden' value=${item.first_payment}>
                           <p>${item.next_payment.replace(/(\d+)-(\d+)-(\d+)/g, "$1年$2月$3日")}[${item.first_payment.replace(/(\d+)-(\d+)-(\d+)/g, "$1年$2月$3日")}]</p>
