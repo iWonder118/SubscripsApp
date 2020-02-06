@@ -36,6 +36,15 @@
       &:hover{
         opacity: 0.75;
       }
+
+    }
+
+    &__name{
+      @extend a;
+
+      &:hover{
+        opacity: 1;
+      }
     }
 
     &__total-service{

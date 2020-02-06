@@ -2,7 +2,7 @@
   = link_to 'SubscripS','/' ,class: "header__top"
   .header-info
     - if user_signed_in?
-      = link_to '#', class: 'header-info__logout' do
+      %p{class: 'header-info__name'}
         = "#{current_user.name} さん"
       .header-info__total-service
         利用サービス数 :
