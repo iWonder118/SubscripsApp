@@ -3,6 +3,8 @@ class Item < ApplicationRecord
 
   belongs_to :user
   
+  acts_as_taggable
+
   include RankedModel
   ranks :row_order, with_same: :user_id 
 
