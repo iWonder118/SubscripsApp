@@ -1,9 +1,9 @@
 class Item < ApplicationRecord
+  acts_as_taggable
+  
   has_one :payment, dependent: :destroy
 
   belongs_to :user
-  
-  acts_as_taggable
 
   include RankedModel
   ranks :row_order, with_same: :user_id 
