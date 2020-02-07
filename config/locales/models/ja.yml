@@ -20,6 +20,7 @@ ja:
         plan: 契約プラン
         price: 価格
         release: 公開設定
+        tag_list: ラベル
       payment:
         period_long: 支払い間隔
         first_payment: 初回支払日

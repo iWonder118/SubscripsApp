@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow-y:scroll;
 
     .modal-line{
       @include flex-between;
@@ -42,7 +43,7 @@
       }
 
       &__text-field{
-        height: 35px;
+        height: 75%;
         width: 68%;
         padding: 0 10px;
         border: 2px solid $md-grey-300;
@@ -53,7 +54,7 @@
       }
 
       &__integer{
-        height: 35px;
+        height: 75%;
         width: 38%;
         padding: 0 10px;
         border: 2px solid $md-grey-300;
@@ -64,7 +65,7 @@
         text-align: right;
 
         &-period{
-          height: 35px;
+          height: 75%;
           width: 19%;
           padding: 0 10px;
           border: 2px solid $md-grey-300;
@@ -79,7 +80,7 @@
       }
 
       &__date{
-        height: 35px;
+        height: 75%;
         width: 28%;
         padding: 0 10px;
         border: 2px solid $md-grey-300;
@@ -105,7 +106,7 @@
       }
 
       &__text-area{
-        height: 60px;
+        height: 90%;
         width: 68%;
         padding: 5px 10px;
         border: 2px solid $md-grey-300;
@@ -117,7 +118,7 @@
       }
 
       &__select{
-        height: 35px;
+        height: 75%;
         width: 18%;
         border: 2px solid $md-grey-300;
         border-radius: 8px;
@@ -135,7 +136,7 @@
 
       .color-selector{
         width: 68%;
-        margin: 20px 0;
+        margin: 10px 0 30px;
         display: flex;
         justify-content: space-around;
 

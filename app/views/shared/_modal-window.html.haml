@@ -80,6 +80,13 @@
 
       .modal-line
         .modal-line__labels
+          = form.label :tag_list
+          .arbitrary
+            任意
+        %ul#item-tags.modal-line__text-field
+
+      .modal-line
+        .modal-line__labels
           = form.label :release
           .required
             必須
