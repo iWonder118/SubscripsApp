@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   def index
     @item = Item.new
     @item.build_payment
-    @items = Item.rank(:row_order).includes(:payment).where(user_id: current_user.id)
+    @items = Item.rank(:row_order).includes(:payment, :tags).where(user_id: current_user.id)
   end
 
   def show
@@ -72,11 +72,11 @@ private
   end
 
   def set_item
-    @item = Item.includes(:payment).find(params[:id])
+    @item = Item.includes(:payment, :tags).find(params[:id])
   end
 
   def set_share
-    @share = Item.find(params[:id])
+    @share = Item.includes(:tags).find(params[:id])
   end
 
   def reset_row_order

@@ -35,6 +35,10 @@
                 = item.title
               %p{class: "header-survice__plan", "data-plan": "#{item.id}", "aria-label": "プラン名", "data-microtip-position": "top", "role": "tooltip"}
                 = item.plan
+              .header-survice__labels{"aria-label": "ラベル", "data-microtip-position": "top", "role": "tooltip"}
+                - item.tags.each do |tag|
+                  %span.label-content
+                    = "#{tag.name}"
             %p{class: "header-price", "data-price": "#{item.id}", "aria-label": "価格", "data-microtip-position": "top", "role": "tooltip"}
               ¥
               = item.price

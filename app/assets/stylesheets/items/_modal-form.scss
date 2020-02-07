@@ -51,6 +51,14 @@
         margin-bottom: 20px;
         display: block;
         font-size: 1.25rem;
+
+        .tagit-choice{
+          padding: .2em 30px .2em .5em;
+
+          .text-icon{
+            font-size: 2rem;
+          }
+        }
       }
 
       &__integer{

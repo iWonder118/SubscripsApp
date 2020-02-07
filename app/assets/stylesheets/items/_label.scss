@@ -1,0 +1,13 @@
+.header-survice__labels{
+  margin-left: 20px;
+
+  .label-content{
+    padding: 5px 7px;
+    border: 2px solid $md-blue-300;
+    margin-right: 10px; 
+    border-radius: 8px;
+    font-size: 1.25rem;
+    background-color: $md-white;
+    cursor: default;
+  }
+}
