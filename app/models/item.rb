@@ -4,8 +4,8 @@ class Item < ApplicationRecord
 
   has_one :payment, dependent: :destroy
 
-  has_many :categories_articles
-  has_many :categories, through: :categories_articles
+  has_many :categories_articles, dependent: :destroy
+  has_many :categories, through: :categories_articles, dependent: :destroy
 
   include RankedModel
   ranks :row_order, with_same: :user_id 
