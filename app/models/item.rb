@@ -1,8 +1,12 @@
 class Item < ApplicationRecord
-  has_one :payment, dependent: :destroy
 
   belongs_to :user
-  
+
+  has_one :payment, dependent: :destroy
+
+  has_many :categories_articles
+  has_many :categories, through: :categories_articles
+
   include RankedModel
   ranks :row_order, with_same: :user_id 
 
