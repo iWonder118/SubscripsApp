@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   before_action :set_item, only: [:update, :destroy, :sort]
   before_action :set_share, only: [:show]
+  before_action :set_days_fee, only: [:create, :update, :show]
 
   after_action :reset_row_order, only: [:sort, :create]
 
@@ -81,6 +82,10 @@ private
 
   def set_share
     @share = Item.find(params[:id])
+  end
+
+  def set_days_fee
+    @days_fee = Item.find(params[:id]).amount_per_day
   end
 
   def reset_row_order

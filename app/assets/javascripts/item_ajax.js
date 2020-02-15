@@ -47,6 +47,10 @@ $(document).on('turbolinks:load', function () {
                           <div class='body-release__label'> 公開設定 </div> <input data-release="${item.id}" type='hidden' value="${item.release}">
                           ${item.release ? "<div class='body-release__display-on'> 公開中 </div>" : "<div class='body-release__display-off'> 非公開 </div>"}
                         </div>
+                        <div class='body-paymethod'>
+                          <div class='body-paymethod__label'>年間支払金額 [１日あたりの金額]</div>
+                          <p>${item.fee_per_month}円 [約${item.fee_per_day}円]</p>
+                        </div>
                         <div class='body-description'>
                           <div class='body-description__label'> メモ </div>
                           <input data-description="${item.id}" type='hidden' value="${item.description}">
