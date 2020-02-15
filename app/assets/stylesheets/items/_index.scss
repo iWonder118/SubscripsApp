@@ -296,6 +296,18 @@
             color: $md-grey-100;
           }
         }
+        
+        .body-periodfee{
+          min-width: 50%; 
+          max-width: 50%; 
+          padding: 1%;
+
+          &__label{
+            padding: 1%;
+            border-bottom: 1px $md-grey-400 solid;
+            margin-bottom: 10px;
+          }
+        }
 
         .body-description{
           min-width: 100%; 
