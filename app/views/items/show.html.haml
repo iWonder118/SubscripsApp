@@ -1,6 +1,9 @@
 = render "shared/header"
 .items-main{style: "display: flex; align-items: center;"}
   .main-contents{id: "item-#{@share.id}"}
+    %p{class: "heading"}
+      = @share.user.name
+      さんがおすすめしてるサービスです！
     .content
       .content__header
         .header-survice

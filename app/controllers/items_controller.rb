@@ -81,7 +81,7 @@ private
   end
 
   def set_share
-    @share = Item.find(params[:id])
+    @share = Item.includes(:user).find(params[:id])
   end
 
   def set_days_fee
