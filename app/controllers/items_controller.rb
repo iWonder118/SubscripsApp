@@ -4,13 +4,18 @@ class ItemsController < ApplicationController
 
   before_action :set_item, only: [:update, :destroy, :sort]
   before_action :set_share, only: [:show]
+  before_action :set_days_fee, only: [:create, :update, :show]
 
   after_action :reset_row_order, only: [:sort, :create]
 
   def index
     @item = Item.new
+    @days_fees = Array.new
     @item.build_payment
     @items = Item.rank(:row_order).includes(:payment).where(user_id: current_user.id)
+    @items.each do |item|
+      @days_fees << item.amount_per_day
+    end
   end
 
   def show
@@ -76,7 +81,11 @@ private
   end
 
   def set_share
-    @share = Item.find(params[:id])
+    @share = Item.includes(:user).find(params[:id])
+  end
+
+  def set_days_fee
+    @days_fee = Item.find(params[:id]).amount_per_day
   end
 
   def reset_row_order

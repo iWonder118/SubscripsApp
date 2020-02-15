@@ -5,6 +5,9 @@ $(document).on('turbolinks:load', function () {
         this.remove();
       });
     });
+    $('.notice').fadeOut(3000).queue(function () {
+      this.remove();
+    });
     $('.alert').fadeOut(3000).queue(function () {
       this.remove();
     });

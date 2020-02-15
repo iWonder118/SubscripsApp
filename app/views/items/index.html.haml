@@ -2,7 +2,7 @@
 .items-main
   = render "shared/notification"
   %ul.main-contents#result
-    - @items.each do |item|
+    - @items.zip(@days_fees) do |item, days_fee|
       %li{class:"item", id: "item-#{item.id}"}
         .function-buttons
           %span{class: "sort_item", href: sort_user_item_path(current_user.id, item.id)}
@@ -92,6 +92,14 @@
               - else
                 .body-release__display-off
                   非公開
+            .body-periodfee
+              .body-periodfee__label
+                年間支払金額[１日あたりの金額]
+              %p
+                = item.price.to_i * 12
+                円 [ 約
+                = days_fee
+                円 ]
             .body-description
               .body-description__label
                 メモ

@@ -17,5 +17,7 @@ else
   json.next_payment @item.payment.first_payment.since(@item.payment.period_long.day).strftime("%Y年%m月%d日")
 end
 json.pay_method    @item.payment.pay_method
+json.fee_per_month @item.price.to_i * 12
+json.fee_per_day   @days_fee
 json.description   @item.payment.description
 json.flash         "作成が完了しました"
