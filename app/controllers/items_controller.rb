@@ -9,8 +9,12 @@ class ItemsController < ApplicationController
 
   def index
     @item = Item.new
+    @days_fees = Array.new
     @item.build_payment
     @items = Item.rank(:row_order).includes(:payment).where(user_id: current_user.id)
+    @items.each do |item|
+      @days_fees << item.amount_per_day
+    end
   end
 
   def show
