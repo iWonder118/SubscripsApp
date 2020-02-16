@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   before_action :set_item, only: [:update, :destroy, :sort]
   before_action :set_share, only: [:show]
-  before_action :set_days_fee, only: [:create, :update, :show]
+  before_action :set_days_fee, only: [ :update, :show]
 
   after_action :reset_row_order, only: [:sort, :create]
 
@@ -29,6 +29,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params.merge(row_order_position: :last))
     if @item.save
+      @days_fee = @item.amount_per_day
       respond_to do |format|
         format.json
       end
