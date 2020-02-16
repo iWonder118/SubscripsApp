@@ -130,4 +130,22 @@ describe Item, type: :model do
       expect(item.payment.errors[:first_payment]).to include("を入力してください")
     end
   end
+
+  describe "#method" do
+    it "amount_per_dayで現在の月の日数でpriceが割られていること" do
+      item = build(:item)
+      days = Date.today.end_of_month.mday
+      price = item.price.to_i 
+      price_per_day = price / days
+      expect(item.amount_per_day).to eq(price_per_day)
+    end
+
+    it "小数点以下の数値は切り捨てられること" do
+      item = build(:item)
+      days = Date.today.end_of_month.mday
+      price = item.price.to_i
+      price_per_day = price / days .to_f
+      expect(item.amount_per_day).to_not eq(price_per_day)
+    end
+  end
 end
