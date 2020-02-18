@@ -1,4 +1,4 @@
-class RenamepublicCulumnToItems < ActiveRecord::Migration[5.2]
+class RenamePrivateCulumnToItems < ActiveRecord::Migration[5.2]
   def change
     rename_column :items, :private, :public
   end
