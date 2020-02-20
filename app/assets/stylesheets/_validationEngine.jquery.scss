@@ -47,11 +47,25 @@ position:relative;
 color: $md-white;
 min-width: 120px;
 font-size: 1rem;
-padding: 2px 5px 2px 5px;
+padding: 2px 8px;
 border-radius: 8px;
 -moz-border-radius: 8px;
 -webkit-border-radius: 8px;
 -o-border-radius: 8px;
+
+&:before {
+  background: #ee0101;
+  position: absolute;
+  top: 0;
+  right: -25px;
+  padding: 6px 6px 6px 10px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-family: "Font Awesome 5 Free";
+  content: '\f057';
+  font-size: 1rem;
+  font-weight: 900;
+}
 }
 
 .formError.inline .formErrorContent {
