@@ -11,7 +11,7 @@
   z-index: 2;
 
   .modal-form{
-    height: 95%;
+    height: 98%;
     width: 60%;
     padding: 1% 2%;
     border: 15px $md-white solid;
@@ -48,7 +48,7 @@
         padding: 0 10px;
         border: 2px solid $md-grey-300;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         display: block;
         font-size: 1.25rem;
       }
@@ -59,7 +59,7 @@
         padding: 0 10px;
         border: 2px solid $md-grey-300;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         display: block;
         font-size: 1.25rem;
         text-align: right;
@@ -70,7 +70,7 @@
           padding: 0 10px;
           border: 2px solid $md-grey-300;
           border-radius: 8px;
-          margin-bottom: 20px;
+          margin-bottom: 30px;
           display: block;
           font-size: 1.25rem;
           position: absolute;
@@ -85,7 +85,7 @@
         padding: 0 10px;
         border: 2px solid $md-grey-300;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         font-size: 1.25rem;
 
         &-webkit-datetime-edit{
@@ -111,7 +111,7 @@
         padding: 5px 10px;
         border: 2px solid $md-grey-300;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         display: block;
         font-size: 1.25rem;
         resize: none;
@@ -122,7 +122,7 @@
         width: 18%;
         border: 2px solid $md-grey-300;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         display: block;
         font-size: 1.25rem;
         
@@ -136,7 +136,7 @@
 
       .color-selector{
         width: 68%;
-        margin: 20px 0;
+        margin-bottom: 30px;
         display: flex;
         justify-content: space-around;
 
