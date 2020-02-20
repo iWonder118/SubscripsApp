@@ -5,14 +5,14 @@
         = form.label :title
         .required
           必須
-      = form.text_field :title, class: "modal-line__text-field", placeholder: "例) Netflix"
+      = form.text_field :title, class: "modal-line__text-field validate[required,minSize[3],maxSize[40]]", placeholder: "例) Netflix"
 
     .modal-line
       .modal-line__labels
         = form.label :link
         .required
           必須
-      = form.text_field :link, class: "modal-line__text-field", placeholder: "例) https://www.netflix.com/jp/"
+      = form.text_field :link, class: "modal-line__text-field validate[required]", placeholder: "例) https://www.netflix.com/jp/"
 
     .modal-line
       .modal-line__labels-color
@@ -37,7 +37,7 @@
         = form.label :plan
         .required
           必須
-      = form.text_field :plan, class: "modal-line__text-field", placeholder: "例) ベーシックプラン"
+      = form.text_field :plan, class: "modal-line__text-field validate[required,minSize[3],maxSize[40]]", placeholder: "例) ベーシックプラン"
 
     .modal-line
       .modal-line__labels
@@ -46,7 +46,7 @@
           必須
       %p.price_unit
         ¥
-      = form.text_field :price, class: "modal-line__integer", placeholder: "例) 800"
+      = form.text_field :price, class: "modal-line__integer validate[required,integer,min[100],max[1000000]]", placeholder: "例) 800"
 
     = form.fields_for :payment do |pform|
       .modal-line
@@ -54,15 +54,15 @@
           = pform.label :period_long
           .required
             必須
-        = pform.text_field  :period_long, class: "modal-line__integer-period", placeholder: "例) 1"
-        = pform.select :period_unit, [['---', 0], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]], {}, class: "modal-line__select"
+        = pform.text_field  :period_long, class: "modal-line__integer-period validate[required]", placeholder: "例) 1"
+        = pform.select :period_unit, [['---', nil], ['ヶ月ごと', 1], ['週間ごと', 2], ['日ごと', 3]], {}, class: "modal-line__select validate[required]"
 
       .modal-line
         .modal-line__labels
           = pform.label :first_payment
           .required
             必須
-        = pform.date_field :first_payment, class: "modal-line__date"
+        = pform.date_field :first_payment, class: "modal-line__date validate[required]"
 
       .modal-line
         .modal-line__labels

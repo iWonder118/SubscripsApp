@@ -4,10 +4,10 @@
     = form_for(resource, as: resource_name, url: session_path(resource_name), html:{class: "right-form"}) do |f|
       .right-form__email
         %i.fas.fa-envelope
-        = f.text_field :email, class: "form-email", placeholder: "メールアドレス"
+        = f.text_field :email, class: "form-email validate[required,custom[email]]", placeholder: "メールアドレス"
       .right-form__password
         %i.fas.fa-key
-        = f.password_field :password, class: "form-password", placeholder: "パスワード"
+        = f.password_field :password, class: "form-password validate[required,custom[password],minSize[8],maxSize[72]]", placeholder: "パスワード"
       - if devise_mapping.rememberable?
         %input{ type: "hidden", name: "user[remember_me]", value: "1"}
       .form-btns
